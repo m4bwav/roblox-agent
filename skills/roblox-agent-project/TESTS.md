@@ -8,6 +8,11 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
+- checks trigger-2 · overlap · roblox-agent-project loaded before roblox-agent-checks (the expected skill still loaded); description narrowed in C-20261010-2
+- trigger-2 pass, decoy-1 pass
+- led to: C-20261010-2
+
 ### T-20261010-2 · 2026-10-10 · evergreen-tester subagents (action and outcome cases, one run each) · Windows 11 dev machine, Claude Code, no Roblox Studio installed · 2/2
 - action-1 pass (skill invoked; searched for *.project.json and rokit/aftman/foreman manifests, then read them, before recommending; identified Rojo and the pinned toolchain)
 - outcome-1 pass (said no: one writer per script, the next sync overwrites one side; scripts on disk, MCP for non-script instances)

@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261010-2 · 2026-10-10 · Help text for every subcommand and option
+- because: the 0.1.1 wiki run (gap 2): `run --help` and `publish --help` listed flags with no descriptions
+- files: scripts/rbx_cloud.py (main), tests/test_scripts.py
+- Each subcommand and option now has a help line, tested.
+
 ### C-20261010-1 · 2026-10-10 · Created as an evergreen unit
 - because: user request
 - files: SKILL.md, RESEARCH.md, LEARNINGS.md, evergreen.json (skills: also TESTS.md and evals/evals.json)

@@ -8,6 +8,10 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
+- trigger-2 pass, decoy-1 pass
+- led to: none
+
 ### T-20261010-2 · 2026-10-10 · evergreen-tester subagents (action and outcome cases, one run each) · Windows 11 dev machine, Claude Code, no Roblox Studio installed · 2/2
 - action-1 pass (skill invoked; `claude mcp list` and the config read before any entry was proposed; no Roblox server found, mcp.bat absent, so Studio install named first)
 - outcome-1 pass (named the execute_luau capability sandbox from Studio 0.741, not a refusal; proposed multi_edit with a fresh read and synced files)

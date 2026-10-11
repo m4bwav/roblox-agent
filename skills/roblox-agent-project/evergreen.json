@@ -38,15 +38,15 @@
     "learnings": 0,
     "changes": 0,
     "research": 3,
-    "tests": 2
+    "tests": 3
   },
   "consolidate_every": 25,
   "tests": {
-    "last_run": "2026-10-10T23:40",
-    "harness": "evergreen-tester subagents, action and outcome cases, one run each",
+    "last_run": "2026-10-10T23:55",
+    "harness": "evergreen-tester subagents, one run per case",
     "env": "dev-machine",
-    "cases": 2,
-    "passed": 2,
+    "cases": 4,
+    "passed": 4,
     "failed": 0,
     "failing": [],
     "last_failure": null,

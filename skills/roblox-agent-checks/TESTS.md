@@ -8,6 +8,10 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
+- trigger-2 pass (after roblox-agent-project; see that skill's C-20261010-2), decoy-1 pass
+- led to: none
+
 ### T-20261010-2 · 2026-10-10 · evergreen-tester subagents (action and outcome cases, one run each) · Windows 11 dev machine, Claude Code, no Roblox Studio installed · 2/2
 - action-1 pass (skill invoked; ran rbx_check.py on tests/fixtures/place with --fetch-defs and --lune; summary pass 6 fail 0 skip 0 quoted)
 - outcome-1 pass (a skip is not a pass; named --fetch-defs and --defs)

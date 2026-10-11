@@ -132,6 +132,19 @@ class CloudTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertTrue(out["dry_run"])
 
+    def test_subcommand_help_describes_every_option(self):
+        for sub, opts in (("run", ["--universe", "--script", "--timeout", "--no-wait", "--dry-run"]),
+                          ("publish", ["--file", "--type", "--yes", "--key-env"])):
+            p = subprocess.run([sys.executable, str(CLOUD), sub, "--help"], capture_output=True, text=True, encoding="utf-8")
+            self.assertEqual(p.returncode, 0)
+            lines = p.stdout.splitlines() + [""]
+            for opt in opts:
+                i = next(n for n, l in enumerate(lines) if l.strip().startswith(opt))
+                rest = lines[i].strip()[len(opt):].split()
+                # argparse puts the help text on the option's line, or on the next line when the option is long
+                nxt = lines[i + 1].strip()
+                self.assertTrue(len(rest) > 1 or (nxt and not nxt.startswith("-")), "%s %s has no help" % (sub, opt))
+
     def test_ids_must_be_numeric(self):
         code, out, _ = run(CLOUD, "run", "--universe", "abc", "--place", "2", "--script", "x", env=self.env)
         self.assertEqual(code, 2)
@@ -148,6 +161,13 @@ class CheckTests(unittest.TestCase):
     def test_unknown_check_is_a_usage_error(self):
         code, out, _ = run(CHECK, str(FIXTURE), "--only", "nonsense")
         self.assertEqual(code, 2)
+
+    def test_missing_defs_file_is_a_usage_error(self):
+        # 0.1.1 skipped the types check and reported ok; a path the user named must exist.
+        code, out, _ = run(CHECK, str(FIXTURE), "--defs", "no-such-file.d.luau")
+        self.assertEqual(code, 2)
+        self.assertFalse(out["ok"])
+        self.assertIn("--defs file not found", out["error"])
 
     def test_reads_the_project_tree(self):
         code, out, raw = run(CHECK, str(FIXTURE), "--only", "lune")
