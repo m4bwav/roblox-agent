@@ -10,6 +10,9 @@ Last updated 2026-10-10 (late).
 - Wiki live at https://github.com/m4bwav/roblox-agent/wiki (10 pages, verified against v0.1.1); how to update it: [notes/2026-10-10-wiki-run/2026-10-10-github-wiki.md](notes/2026-10-10-wiki-run/2026-10-10-github-wiki.md).
 - Eval runs: action and outcome cases for all five skills passed once each (T-20261010-2 in each TESTS.md).
 
+- Open for the maintainer's review: PR #1 (0.1.2 fixes, CI green). After it merges: tag v0.1.2 and update the wiki (wiki note's Update steps).
+- The next session's prompt is kept in the owner's private notes, outside the repository.
+
 ## Owed
 
 1. Run `roblox-agent-studio` against a live Roblox Studio with a place open and the MCP setting on (the maintainer's clicks): connection, `list_roblox_studios`, the playtest loop, the `execute_luau` sandbox claim. Studio 0.742 is installed on the development machine since 2026-10-10. Log results in its TESTS.md and LEARNINGS.md.
