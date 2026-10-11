@@ -62,6 +62,14 @@ Write an entry the moment a real signal happens: a user correction, the same err
 - Scope: global
 - Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
 
+### L-008 · 2026-10-11 · screen_capture is black while Studio is minimised, and leaves SurfaceGuis out
+- Trigger: every capture came back as a blank dark viewport after the user minimised Studio; restoring the window (without focus) fixed it. A sign's SurfaceGui text was missing from every capture although `GetChildren` listed the guis and a plain screenshot of the Studio window showed the text.
+- Hypothesis: the tool reads Studio's own viewport, which does not render while minimised and draws world GUIs in a pass the capture skips.
+- Rule: if captures are blank, check whether the Studio window is minimised and restore it with `ShowWindow(hwnd, SW_SHOWNOACTIVATE)` (put it back with `SW_SHOWMINNOACTIVE` afterwards); to check SurfaceGui or BillboardGui content, set `workspace.CurrentCamera.CFrame` with execute_luau and screenshot the window instead.
+- Evidence: live session 2026-10-11 (restore-without-focus and window-screenshot helpers)
+- Scope: global (Windows)
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
 <!-- Example (delete once you have a real entry):
 ### L-001 · 2026-10-10 · One-line lesson in plain words
 - Trigger: what happened, with dates or counts
