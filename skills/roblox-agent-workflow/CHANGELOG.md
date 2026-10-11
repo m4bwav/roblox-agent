@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-3 · 2026-10-11 · Learning: re-mesh stale terrain instead of regenerating it
+- because: L-002
+- files: LEARNINGS.md
+- Sky-coloured holes seen only up close after repeated terrain rebuilds.
+
 ### C-20261011-2 · 2026-10-11 · Learning: Lune and terrain, carving under parts
 - because: L-001
 - files: LEARNINGS.md

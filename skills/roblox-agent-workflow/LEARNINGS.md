@@ -6,6 +6,14 @@ Write an entry the moment a real signal happens: a user correction, the same err
 
 ## Active
 
+### L-002 · 2026-10-11 · Rebuilding terrain several times in one session can leave flat sky-coloured patches up close
+- Trigger: after five Clear-and-WriteVoxels rebuilds in one Studio session, the user saw flat blue patches (sky colour) near the camera that vanished when zoomed out. Raycasts there hit solid Grass and no part covered the spot.
+- Hypothesis: Studio kept stale near-LOD terrain meshes for some chunks after the rapid rewrites; the voxel data was correct.
+- Rule: if terrain shows sky-coloured holes only up close, first raycast the spot (data or rendering?); if the data is solid, read and write back the same voxels over the area (ReadVoxels then WriteVoxels, 128-stud regions) to force a re-mesh, or save and reopen the place. Do not regenerate the data.
+- Evidence: live session 2026-10-11, one re-mesh pass of 304 regions cleared it
+- Scope: global
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
 ### L-001 · 2026-10-11 · Lune cannot write terrain, and parts laid on smooth terrain sink unless it is carved
 - Trigger: a place generated with Lune (`@lune/roblox`, `serializePlace`) from map data: terrain voxels cannot be written there, so a builder module made the terrain with `WriteVoxels` in Studio. Paths, pool decks and court pads placed at the height-map height then sat 0.3 to 0.7 studs under the rendered surface, invisible; carving a strip narrower than two 4-stud voxels did not help.
 - Hypothesis: `WriteVoxels` occupancy plus smoothing puts the surface up to about a voxel off the source height, and a narrow carve is averaged back up by its neighbours.
