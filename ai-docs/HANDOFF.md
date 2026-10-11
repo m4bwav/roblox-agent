@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated 2026-10-10 (late).
+Last updated 2026-10-11.
 
 ## State
 
@@ -10,7 +10,8 @@ Last updated 2026-10-10 (late).
 - Wiki live at https://github.com/m4bwav/roblox-agent/wiki (10 pages, verified against v0.1.1); how to update it: [notes/2026-10-10-wiki-run/2026-10-10-github-wiki.md](notes/2026-10-10-wiki-run/2026-10-10-github-wiki.md).
 - Eval runs: action and outcome cases for all five skills passed once each (T-20261010-2 in each TESTS.md).
 
-- Open for the maintainer's review: PR #1 (0.1.2 fixes, CI green). After it merges: tag v0.1.2 and update the wiki (wiki note's Update steps).
+- v0.1.2 (2026-10-11): `--defs` missing file is a usage error, `rbx_cloud.py` help text, narrower project description. Wiki updated for it the same day (wiki note, "Update for 0.1.2").
+- Cost rule: the maintainer pays Roblox nothing. Studio, Open Cloud keys and Luau Execution are free; every owed run must stay on that path.
 - The next session's prompt is kept in the owner's private notes, outside the repository.
 
 ## Owed
@@ -19,7 +20,7 @@ Last updated 2026-10-10 (late).
 2. Run `rbx_cloud.py run` and `publish --type Saved` against a real test place with a scoped key, and `references/run-jest.luau` with Jest Roblox 3.20. Confirm the `output.results` shape.
 3. Run the eval suites three times per case (the first pass ran fewer; see each TESTS.md).
 4. Re-check whether `/plugin` in Claude Code finds Roblox's "Roblox Studio" plugin (open question in roblox-agent-studio).
-5. Fix the two gaps the wiki run found (`--defs` missing file reported as a skip with ok true; `rbx_cloud.py` subcommand help has no descriptions), see the wiki note.
+5. Lead from the DevForum (late September 2026 bug report): Luau Execution may allow only about 30 task creates an hour per key owner, beside the documented 5 a minute. Check it in the run in item 2 and add it to roblox-agent-cloud if true.
 6. Consider submitting the plugin to the Anthropic plugin directory once items 1 and 2 pass.
 
 Related: [INDEX.md](INDEX.md)

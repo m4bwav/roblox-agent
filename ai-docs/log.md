@@ -10,4 +10,9 @@ Append-only. Newest last.
 
 - Later on 2026-10-10: added the README banner, probed the Studio MCP server live (L-001 in roblox-agent-studio), released v0.1.1, and wrote and published the wiki (verified against v0.1.1; note in notes/2026-10-10-wiki-run/).
 
+## 2026-10-11
+
+- PR #1 merged; tagged v0.1.2 (release workflow passed). Updated the wiki for 0.1.2 in wikiwright's Update mode: the verify run changed only the three expected cases; all checks and `live` passed (wiki commit 230a387).
+- Checked the cost of the owed live runs: Studio, Open Cloud keys and Luau Execution need no payment. Found a DevForum report of an undocumented Luau Execution limit (about 30 creates an hour); it is a lead in HANDOFF.
+
 Related: [INDEX.md](INDEX.md)

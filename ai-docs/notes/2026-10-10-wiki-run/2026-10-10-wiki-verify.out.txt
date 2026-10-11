@@ -275,38 +275,9 @@ $ echo $?
 1
 === check-no-defs
 $ python rbx_check.py place --only types --defs missing.d.luau
-{
-  "ok": true,
-  "project": "place",
-  "checks": {
-    "types": {
-      "status": "skip",
-      "reason": "--defs file not found: missing.d.luau"
-    }
-  },
-  "project_file": "default.project.json",
-  "sources": [
-    "src/shared",
-    "src/server",
-    "src/client"
-  ],
-  "toolchain_file": "rokit.toml",
-  "packages": null,
-  "tools": {
-    "rojo": true,
-    "selene": true,
-    "stylua": true,
-    "luau-lsp": true,
-    "lune": true
-  },
-  "summary": {
-    "pass": 0,
-    "fail": 0,
-    "skip": 1
-  }
-}
+{"ok": false, "error": "--defs file not found: missing.d.luau"}
 $ echo $?
-0
+2
 === check-not-project
 $ python rbx_check.py empty
 {
@@ -328,16 +299,21 @@ usage: rbx_cloud.py run [-h] --universe UNIVERSE --place PLACE
                         [--key-env KEY_ENV] [--dry-run] [--version VERSION]
                         --script SCRIPT [--timeout TIMEOUT] [--no-wait]
 
+run a Luau script on a Roblox server (Luau Execution) and print its results
+and logs
+
 options:
   -h, --help           show this help message and exit
-  --universe UNIVERSE
-  --place PLACE
-  --key-env KEY_ENV
-  --dry-run
-  --version VERSION
-  --script SCRIPT
-  --timeout TIMEOUT
-  --no-wait
+  --universe UNIVERSE  the experience's universe id (a number)
+  --place PLACE        the place id (a number)
+  --key-env KEY_ENV    environment variable that holds the Open Cloud API key
+                       (default ROBLOX_API_KEY)
+  --dry-run            print the request without sending it; no key needed
+  --version VERSION    run against this place version (default: the latest)
+  --script SCRIPT      the Luau file to run
+  --timeout TIMEOUT    task timeout in seconds (default 300, the maximum)
+  --no-wait            return as soon as the task is created, with its path to
+                       poll
 $ echo $?
 0
 === cloud-publish-help
@@ -346,15 +322,20 @@ usage: rbx_cloud.py publish [-h] --universe UNIVERSE --place PLACE
                             [--key-env KEY_ENV] [--dry-run] --file FILE
                             [--type {Saved,Published}] [--yes]
 
+upload a .rbxl or .rbxlx file as a new place version
+
 options:
   -h, --help            show this help message and exit
-  --universe UNIVERSE
-  --place PLACE
-  --key-env KEY_ENV
-  --dry-run
-  --file FILE
+  --universe UNIVERSE   the experience's universe id (a number)
+  --place PLACE         the place id (a number)
+  --key-env KEY_ENV     environment variable that holds the Open Cloud API key
+                        (default ROBLOX_API_KEY)
+  --dry-run             print the request without sending it; no key needed
+  --file FILE           the place file to upload
   --type {Saved,Published}
-  --yes
+                        Saved (default) stores a version; Published makes it
+                        live for players
+  --yes                 confirm a Published upload; the user must have agreed
 $ echo $?
 0
 === cloud-dry-run
