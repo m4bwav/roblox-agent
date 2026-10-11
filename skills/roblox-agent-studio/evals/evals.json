@@ -1,0 +1,79 @@
+{
+  "skill": "roblox-agent-studio",
+  "_format": "skill-creator evals.json plus evergreen fields (kind, decoy, evidence, baseline); extra fields are ignored by skill-creator's runner. Rules: protocol/TESTING.md.",
+  "evals": [
+    {
+      "id": "trigger-1",
+      "kind": "trigger",
+      "prompt": "Can you hook Claude Code up to Roblox Studio so it can see my place?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-studio skill is invoked"
+      ]
+    },
+    {
+      "id": "trigger-2",
+      "kind": "trigger",
+      "prompt": "The Roblox Studio MCP keeps disconnecting every few minutes and list_roblox_studios comes back empty. What do I do?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-studio skill is invoked"
+      ]
+    },
+    {
+      "id": "decoy-1",
+      "kind": "trigger",
+      "prompt": "Set up Rojo and a rokit.toml for my Roblox game so I can edit scripts in VS Code.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-studio skill is not invoked (roblox-agent-project's job)"
+      ]
+    },
+    {
+      "id": "decoy-2",
+      "kind": "trigger",
+      "prompt": "Connect Claude to my Unity editor over MCP.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-studio skill is not invoked (not Roblox)"
+      ]
+    },
+    {
+      "id": "action-1",
+      "kind": "action",
+      "prompt": "Check whether Claude Code already has a Roblox Studio MCP server registered before you add one, then tell me what to do next.",
+      "expectations": [
+        "the skill checked the existing MCP registrations (claude mcp list or the config) before proposing an entry, proven by the tool call"
+      ],
+      "evidence": {
+        "type": "trace",
+        "tool": "Bash|PowerShell|Read",
+        "input_match": "claude\\s+mcp\\s+list|\\.claude\\.json|\\.mcp\\.json"
+      },
+      "baseline": "not yet run",
+      "runs": 3
+    },
+    {
+      "id": "outcome-1",
+      "kind": "outcome",
+      "prompt": "Claude keeps saying it can't insert scripts with execute_luau in Studio. Why, and what should it do instead?",
+      "expectations": [
+        "names the execute_luau capability sandbox (Studio 0.741 and later) rather than calling it a refusal",
+        "proposes multi_edit or a synced file as the route",
+        "regex on the answer: (?i)(sandbox|capabilit)"
+      ],
+      "baseline": "not yet run",
+      "runs": 3,
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "WebFetch"
+      ],
+      "max_turns": 12
+    }
+  ]
+}

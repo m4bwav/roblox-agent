@@ -1,0 +1,52 @@
+# Checks the skills' structure, manifests, links and public-safety guards, and tests both scripts on the three
+# operating systems on the oldest and newest Python supported. The toolchain job installs the real Roblox tools
+# with setup-rokit, so rbx_check.py is proven on a fixture place (pass) and a broken copy (fail), not assumed.
+name: tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  structure:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.9", "3.14"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: skills, companions, manifests, links and text guards
+        run: python tests/check_skills.py
+      - name: script tests (the toolchain test skips without rojo)
+        run: python tests/test_scripts.py
+  toolchain:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - uses: CompeyDev/setup-rokit@v0.2.1
+        with:
+          path: tests/fixtures/place
+      - name: script tests with rojo, selene, StyLua, luau-lsp and lune installed
+        run: python tests/test_scripts.py
+  budget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - name: size budget (red fails)
+        run: python scripts/budget.py

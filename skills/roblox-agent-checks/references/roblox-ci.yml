@@ -1,0 +1,33 @@
+# Checks a Rojo-based Roblox game on every push and pull request, without Studio.
+# Copy to .github/workflows/roblox-ci.yml. The tools and their versions come from rokit.toml.
+# Adjust SOURCES to the folders your default.project.json maps (rojo init uses src).
+name: roblox-ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+env:
+  SOURCES: src
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: CompeyDev/setup-rokit@v0.2.1
+      - name: packages
+        if: hashFiles('wally.toml') != ''
+        run: wally install
+      - name: Roblox type definitions for luau-lsp
+        run: curl -sSfL -o globalTypes.d.luau https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.luau
+      - name: sourcemap
+        run: rojo sourcemap default.project.json -o sourcemap.json
+      - name: lint
+        run: selene $SOURCES
+      - name: format
+        run: stylua --check $SOURCES
+      - name: types
+        run: luau-lsp analyze --platform=roblox --defs=globalTypes.d.luau --sourcemap=sourcemap.json --ignore="**/_Index/**" $SOURCES
+      - name: build
+        run: rojo build default.project.json -o build.rbxl

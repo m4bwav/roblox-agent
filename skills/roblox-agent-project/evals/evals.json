@@ -1,0 +1,79 @@
+{
+  "skill": "roblox-agent-project",
+  "_format": "skill-creator evals.json plus evergreen fields (kind, decoy, evidence, baseline); extra fields are ignored by skill-creator's runner. Rules: protocol/TESTING.md.",
+  "evals": [
+    {
+      "id": "trigger-1",
+      "kind": "trigger",
+      "prompt": "I want to use Claude Code on my Roblox game from VS Code with Git. Should I use Script Sync or Rojo?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-project skill is invoked"
+      ]
+    },
+    {
+      "id": "trigger-2",
+      "kind": "trigger",
+      "prompt": "start a new roblox project with rojo and the usual tools pinned",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-project skill is invoked"
+      ]
+    },
+    {
+      "id": "decoy-1",
+      "kind": "trigger",
+      "prompt": "Run selene and luau-lsp on my Roblox project and tell me what fails.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-project skill is not invoked (roblox-agent-checks' job)"
+      ]
+    },
+    {
+      "id": "decoy-2",
+      "kind": "trigger",
+      "prompt": "Set up a new Vite project with TypeScript.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-project skill is not invoked (not Roblox)"
+      ]
+    },
+    {
+      "id": "action-1",
+      "kind": "action",
+      "prompt": "Look at this folder and tell me which Roblox sync route it already uses before changing anything.",
+      "expectations": [
+        "the skill looked for *.project.json and a toolchain manifest before recommending, proven by the tool call"
+      ],
+      "evidence": {
+        "type": "trace",
+        "tool": "Glob|Bash|PowerShell|Read",
+        "input_match": "project\\.json|rokit\\.toml|aftman\\.toml|foreman\\.toml"
+      },
+      "baseline": "not yet run",
+      "runs": 3
+    },
+    {
+      "id": "outcome-1",
+      "kind": "outcome",
+      "prompt": "I have Rojo serving my scripts and I also let Claude edit the same scripts through the Studio MCP. Is that fine?",
+      "expectations": [
+        "says no: one writer per script, Rojo's next sync overwrites one side",
+        "routes script edits to disk and MCP to non-script instances",
+        "regex on the answer: (?i)(one writer|overwrit|clobber|both sides|two writers)"
+      ],
+      "baseline": "not yet run",
+      "runs": 3,
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "WebFetch"
+      ],
+      "max_turns": 12
+    }
+  ]
+}

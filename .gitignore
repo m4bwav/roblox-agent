@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+dist/
+*-workspace/
+# build output and editor files from Roblox checks
+*.rbxl
+*.rbxlx
+sourcemap.json
+globalTypes.d.luau

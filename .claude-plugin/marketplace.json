@@ -1,0 +1,8 @@
+{
+  "name": "roblox-agent",
+  "owner": { "name": "Mark Rogers" },
+  "metadata": { "description": "Skills that let AI coding agents build Roblox games: Studio MCP done safely, code on disk, checks without Studio, Open Cloud, and agent rules for Roblox code" },
+  "plugins": [
+    { "name": "roblox-agent", "source": "./", "description": "Five evergreen Roblox skills: Studio's MCP server and playtest loop, Script Sync or Rojo with a Rokit toolchain, one-command Luau checks, Open Cloud Luau Execution and place uploads, and secure-code rules with an AGENTS.md snippet" }
+  ]
+}

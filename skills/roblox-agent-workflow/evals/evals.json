@@ -1,0 +1,79 @@
+{
+  "skill": "roblox-agent-workflow",
+  "_format": "skill-creator evals.json plus evergreen fields (kind, decoy, evidence, baseline); extra fields are ignored by skill-creator's runner. Rules: protocol/TESTING.md.",
+  "evals": [
+    {
+      "id": "trigger-1",
+      "kind": "trigger",
+      "prompt": "Review this RemoteEvent handler for my Roblox shop. Is it exploitable?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-workflow skill is invoked"
+      ]
+    },
+    {
+      "id": "trigger-2",
+      "kind": "trigger",
+      "prompt": "write an AGENTS.md for my roblox game repo",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-workflow skill is invoked"
+      ]
+    },
+    {
+      "id": "decoy-1",
+      "kind": "trigger",
+      "prompt": "Set up the Rokit toolchain for my Roblox project.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-workflow skill is not invoked (roblox-agent-project's job)"
+      ]
+    },
+    {
+      "id": "decoy-2",
+      "kind": "trigger",
+      "prompt": "Review this Express.js route for SQL injection.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-workflow skill is not invoked (not Roblox)"
+      ]
+    },
+    {
+      "id": "action-1",
+      "kind": "action",
+      "prompt": "Is BodyVelocity still OK to use in Roblox? Check the docs, don't guess.",
+      "expectations": [
+        "the skill fetched a create.roblox.com docs page (deprecated list, .md page or the search endpoint), proven by the tool call"
+      ],
+      "evidence": {
+        "type": "trace",
+        "tool": "WebFetch|Bash|PowerShell",
+        "input_match": "create\\.roblox\\.com/docs"
+      },
+      "baseline": "not yet run",
+      "runs": 3
+    },
+    {
+      "id": "outcome-1",
+      "kind": "outcome",
+      "prompt": "OnServerEvent:Connect(function(player, amount) player.leaderstats.Coins.Value += amount end) -- add a shop with this.",
+      "expectations": [
+        "flags that the client chooses the amount",
+        "moves the price and the decision to the server with type and range checks",
+        "regex on the answer: (?i)(client|exploit).*(amount|trust|server)"
+      ],
+      "baseline": "not yet run",
+      "runs": 3,
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "WebFetch"
+      ],
+      "max_turns": 12
+    }
+  ]
+}
