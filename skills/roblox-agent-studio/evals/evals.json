@@ -74,6 +74,28 @@
         "WebFetch"
       ],
       "max_turns": 12
+    },
+    {
+      "id": "outcome-2",
+      "kind": "outcome",
+      "prompt": "execute_luau in Roblox Studio just failed with 'lacking capability LoadUnownedAsset ... and 3 more' when the agent tried to parent a Script. Is Claude refusing? How do I get past it?",
+      "expectations": [
+        "calls it Studio's execute_luau capability sandbox (a Roblox-side restriction that has been rolled out and rolled back), not a refusal",
+        "proposes multi_edit or a synced file, and restarting Studio or checking the DevForum for a rollback",
+        "does not suggest overriding Studio feature flags",
+        "regex on the answer: (?i)(sandbox|capabilit)",
+        "negative regex on the answer: (?i)FFlag\\w*\\s*(=|override|true)"
+      ],
+      "baseline": "not yet run",
+      "runs": 3,
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "WebFetch"
+      ],
+      "max_turns": 12
     }
   ]
 }

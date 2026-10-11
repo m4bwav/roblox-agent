@@ -2,7 +2,7 @@
 
 Findings that back [SKILL.md](SKILL.md). Changes they caused are logged in [CHANGELOG.md](CHANGELOG.md); procedural lessons live in [LEARNINGS.md](LEARNINGS.md); test runs in [TESTS.md](TESTS.md); schedule and state in `evergreen.json`. Protocol: MAINTENANCE.md.
 
-Topic: connecting AI agents to Roblox Studio through its built-in MCP server. Tier `fast`. Last refresh 2026-10-10; next due per `evergreen.json`.
+Topic: connecting AI agents to Roblox Studio through its built-in MCP server. Tier `fast`. Last refresh 2026-10-11; next due per `evergreen.json`.
 
 ## Current understanding
 
@@ -12,17 +12,17 @@ Topic: connecting AI agents to Roblox Studio through its built-in MCP server. Ti
 - Tools (docs updated 2026-10-08; Roblox's plugin README lists a few more, `generate_texture` and `segment_mesh`): script_read, multi_edit, script_search (top 10), script_grep (top 50), search_game_tree, inspect_instance, execute_luau (Edit, Client or Server), get_studio_state, start_stop_play, get_console_output, screen_capture, character_navigation, user_keyboard_input, user_mouse_input, subagent (explore, playtest), generate_mesh, generate_material, generate_procedural_model, wait_job_finished, search_asset, insert_asset, upload_image, store_image, http_get (Roblox docs only), skill, list_roblox_studios. The set varies by Studio version and flags. Every call takes `studio_id` (since 2026-08-19).
 - The `skill` tool serves seven Roblox-authored Assistant skills: rbx-create-skill, rbx-debug, rbx-device-simulator-lua, rbx-docs-search, rbx-perf-profiling, rbx-scene-analysis, rbx-unit-test. Creator-authored skills (markdown, name and description frontmatter) shipped 2026-07-09.
 - Known problems (DevForum, 2026-06 to 10): drops every 5 to 15 minutes (toggle the setting), the setting switching off after updates, a place opened before Assistant loads never connecting, clients that send before `initialize` dropped, `mcp.bat` breaking on Windows paths with spaces, Claude Code 2.1.281 breaking the handshake (workaround `MCP_PROTOCOL_NEGOTIATION=legacy`, Roblox fix 2026-09-27), stale `script_read`/`script_grep` corrupting line-anchored `multi_edit`, aligned whitespace failing `multi_edit`, no batch undo, edit tools failing during playtests, the playtest subagent reporting false passes.
-- Since Studio 0.741, `execute_luau` runs in a capability-restricted thread: no require of unsandboxed modules, `_G` nil, creating or reparenting scripts fails. Users read it as the agent refusing. Whether this is intended is not yet answered by staff.
+- `execute_luau` capability sandbox: a server-side, flag-gated restriction (missing LoadUnownedAsset, ScriptGlobals, DataStore, Network: no require of unsandboxed modules, `_G` nil, creating or reparenting scripts fails). It hit users on 2026-09-14 (0.738, fixed 09-18) and about 2026-10-01 (0.741, staff: "we are rolling this back", 2026-10-02). Off on 0.742 in all three data models (R-20261011-2). Users read it as the agent refusing. A third rollout is possible; no opt-out has been announced.
 - Practice: experienced users keep code on disk and use MCP to inspect, read logs and playtest; some never playtest through MCP because it is slow. Human playtest stays the final check.
 - Community servers: Chrrxs/robloxstudio-mcp (MIT, v3.2.0 on 2026-10-08, about 4,600 npm downloads a week, the maintained fork of boshyxd's archived server) is the most used. WEPPY (`@weppy/roblox-mcp`, AGPL, product) is second. Roblox/studio-rust-mcp-server was archived 2026-04-03. Searches surface lookalike lure repos (68 to 71 stars, no license, September 2026, github.io download buttons) and executor MCPs for exploit clients; never recommend either.
 
 ## Open questions
 
-- Is roblox-studio-agent-plugin listed in Anthropic's plugin directory so `/plugin` finds it? Check again after 2026-10-17.
-- Is the `execute_luau` capability sandbox intended, and will Roblox offer an opt-out for trusted clients?
+- Is roblox-studio-agent-plugin listed in Anthropic's plugin directory so `/plugin` finds it? Not in claude-plugins-official on 2026-10-11; check again after 2026-10-17.
+- Does the `execute_luau` sandbox apply to external MCP clients as well as Assistant? Both were reported affected; staff did not say. Will a third rollout come with a permission prompt for MCP clients?
 - Can Chrrxs's server and the built-in one run side by side without tool-name clashes?
 - Will Roblox expose Script Analysis (type errors) through MCP? Staff asked for use cases on 2026-05-28.
-- Partly tested here (2026-10-10): the server process and handshake were probed on Windows with Studio 0.742 open but no place loaded and the setting off (0 tools, empty studio list, R-20261010-6). A connected session with a place open is still untested.
+- Tested here on Windows, Studio 0.742: stdio probe (R-20261011-1) and native tools in a Claude Code session (R-20261011-2), including `multi_edit` and playtests. macOS is untested.
 
 ## Search plan
 
@@ -31,7 +31,7 @@ Four tracks; every refresh runs at least one query on each (scope each to the pe
 Subject:
 
 - `https://create.roblox.com/docs/studio/mcp.md` (tool list, setup, Quick Connect clients) and `https://create.roblox.com/docs/ai/coding-harness.md`
-- DevForum Announcements JSON `https://devforum.roblox.com/c/updates/announcements/36.json`, filter MCP, Assistant, Studio release notes; `https://devforum.roblox.com/search.json?q=mcp%20studio` sorted by latest
+- DevForum Announcements JSON `https://devforum.roblox.com/c/updates/announcements/36.json`, filter MCP, Assistant, Studio release notes; `https://devforum.roblox.com/search.json?q=mcp%20after:<date>%20order:latest` and `q=LoadUnownedAsset%20order:latest` (sandbox regressions); fetch `/t/<id>.json` to see staff flair and accepted answers. Release-notes pages on create.roblox.com render empty to WebFetch; use the DevForum "Release Notes for N" threads.
 
 Tooling:
 
@@ -55,6 +55,12 @@ Best sources (primary first): create.roblox.com docs (`.md` form), DevForum Anno
 ## Findings log
 
 Newest first. `Track` is subject, tooling, practice, or testing.
+
+### R-20261011-3 · 2026-10-11 · Refresh: the execute_luau sandbox was rolled back by staff (settles the contradiction)
+- summary: Staff wrote "we are rolling this back" on 2026-10-02 (devforum.roblox.com/t/4908470, accepted answer; also /t/4872488). The same restriction appeared 2026-09-14 on 0.738 behind FFlagStudioAssistantPermissionsScriptCapabilities and was fixed 09-18 (/t/4872775). So it is a flag that has come and gone twice, which is why 0.742 tests saw nothing. Also: Roblox's plugin still not in claude-plugins-official; MCP docs unchanged since 10-08 (27 tools); ChatGPT desktop (former Codex desktop) connection reports, staff checking usernames with spaces or non-Latin characters (/t/4914166). Response: adjust (sandbox rule rewritten, eval case added, contradiction cleared). Magnitude 0.6.
+
+### R-20261011-2 · 2026-10-11 · Testing: native tools in a Claude Code session, multi_edit and the sandbox in all three data models (Studio 0.742.0.7421053)
+- summary: A headless `claude -p` session loaded the `mcp__Roblox_Studio__*` tools from the local-scope entry and ran list, create, `script_read`, `multi_edit`, read-back, playtest and cleanup on an unsaved place (T-20261011-2). The 0.741 sandbox did not show in Edit, Server or Client. `execute_luau` returns only its first value; local-scope entries are matched by exact path case. Response: adjust (rule extended to all data models; two working notes).
 
 ### R-20261011-1 · 2026-10-11 · Testing: first live connection and playtest on Windows (Studio 0.742.0.7421053)
 - summary: With a place open and the setting on, `mcp.bat` existed and the proxy exposed 30 tools; `list_roblox_studios` returns `id` and `name`; the playtest loop ran end to end. The reported 0.741 `execute_luau` sandbox did not show on 0.742 in Edit mode (`_G` a table, a new Script parented to ServerScriptService). Response: adjust (the sandbox becomes a reported failure to recognise, not a rule; the id field named).

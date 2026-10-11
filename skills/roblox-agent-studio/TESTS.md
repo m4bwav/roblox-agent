@@ -8,6 +8,15 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261011-2 · 2026-10-11 · native `mcp__Roblox_Studio__*` tools in a headless `claude -p` session (stream-json trace) started in the folder holding the local-scope entry · Windows 11 dev machine, Studio 0.742.0.7421053, unsaved template place (PlaceId 0) · 5/5
+- connection pass: `list_roblox_studios` in the trace returned one studio (`Place1`); its `id` passed as `studio_id` on every later call
+- edit loop pass: `execute_luau` (Edit) created `ServerScriptService.AgentProbe`; `script_read` gave `print("probe v1")`; `multi_edit` (old_string/new_string) reported "1 edits applied"; the second `script_read` gave `print("probe v2")` straight away (no stale read on a one-line script)
+- playtest pass: `start_stop_play` true, `get_studio_state` Play with Client and Server; `get_console_output` showed `probe v2`, so the edited script ran
+- sandbox not reproduced in any data model: Edit, Server and Client each returned `G=table | createScript=true` (pcall around creating a Script under ServerScriptService)
+- cleanup pass: stop returned Edit; AgentProbe destroyed, read-back found none left
+- side findings: `execute_luau` returned only the first of several return values; the interactive VS Code session (lower-case drive letter) did not load the entry registered under the upper-case path
+- led to: L-004, L-005, R-20261011-2, C-20261011-2
+
 ### T-20261011-1 · 2026-10-11 · live probe, stdio client against mcp.bat (read-only, then the playtest loop on an unsaved template place) · Windows 11 dev machine, Studio 0.742.0.7421053, Claude Code manual local entry · 5/5
 - connection pass: 30 tools; `list_roblox_studios` returned `{"studios":[{"id":"8d342c41-...","name":"Place1"}]}`; `get_studio_state` Edit mode
 - playtest loop pass: `start_stop_play` true → "Game Started", state Play with Client and Server; `execute_luau` Server returned "1 players, gravity 196.2"; `get_console_output` showed the probe's own print; stop → Edit again

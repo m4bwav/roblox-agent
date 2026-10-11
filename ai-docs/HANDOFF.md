@@ -16,7 +16,7 @@ Last updated 2026-10-11.
 
 ## Owed
 
-1. Live Studio test done 2026-10-11 (T-20261011-1): connection, playtest loop, sandbox not reproduced on 0.742. Still owed: a run through a registered Claude Code entry in a fresh session (tools in the trace, not a stdio probe), `multi_edit` with a read-back, and whether the sandbox applies in Server or Client data models.
+1. Live Studio test done 2026-10-11 (T-20261011-1 stdio probe, T-20261011-2 native tools): connection, `multi_edit` with read-back, playtest loop; the 0.741 sandbox did not show in Edit, Server or Client on 0.742. The refresh found staff rolled it back on 2026-10-02 (R-20261011-3). Left: macOS, and the new eval case outcome-2.
 2. Run `rbx_cloud.py run` and `publish --type Saved` against a real test place with a scoped key, and `references/run-jest.luau` with Jest Roblox 3.20. Confirm the `output.results` shape.
 3. Run the eval suites three times per case (the first pass ran fewer; see each TESTS.md).
 4. Re-check whether `/plugin` in Claude Code finds Roblox's "Roblox Studio" plugin (open question in roblox-agent-studio).

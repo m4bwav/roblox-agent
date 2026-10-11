@@ -19,4 +19,10 @@ Append-only. Newest last.
 
 - First live run of roblox-agent-studio against Studio 0.742 on the dev machine, through a stdio probe of `mcp.bat` (the session predated the `claude mcp add`). 30 tools, one studio listed, playtest loop passed. `list_roblox_studios` returns `id`, not `studio_id`. The `execute_luau` sandbox reported for 0.741 did not show in Edit mode. Assistant sits behind a top-right button in the 2026 layout. Skill updated (C-20261011-1), contradiction flagged for the next refresh.
 
+## 2026-10-11 (native tools test)
+
+- Ran roblox-agent-studio through the native `mcp__Roblox_Studio__*` tools in a headless `claude -p` session (T-20261011-2): list, create, `multi_edit` with read-back, playtest, sandbox probe in Edit, Server and Client, cleanup. All passed; no sandbox anywhere. The interactive VS Code session had no tools because it opened the folder with a lower-case drive letter while the local-scope entry sits under the upper-case path (L-004). `execute_luau` returns only its first value (L-005). Skill updated (C-20261011-2).
+- Refreshed roblox-agent-studio (R-20261011-3): Roblox staff rolled the execute_luau sandbox back on 2026-10-02, after a first rollback on 2026-09-18; it is a server-side flag that may return. Sandbox rule rewritten, eval case outcome-2 added, contradiction flag cleared (C-20261011-3).
+- Raw results from that run: every sandbox probe returned `G=table | createScript=true`. `script_read` after `multi_edit` read back `print("probe v2")` straight away. The console showed `probe v2` during play. Cleanup returned `found=true | remaining=0 | children=1`; the remaining child, `DestroyHelperUI` (Script), was in ServerScriptService before the run and was left alone.
+
 Related: [INDEX.md](INDEX.md)
