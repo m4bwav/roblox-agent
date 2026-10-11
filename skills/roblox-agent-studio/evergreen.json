@@ -14,12 +14,17 @@
   "topic": "Connecting AI agents to Roblox Studio through its built-in MCP server: Roblox official agent plugin, manual stdio entries, tool list, playtest loop, sandbox and connection pitfalls, community servers",
   "tier": "fast",
   "interval_days": 14,
-  "last_checked": "2026-10-10",
-  "next_due": "2026-10-24",
+  "last_checked": "2026-10-11",
+  "next_due": "2026-10-25",
   "verify_at_use": false,
   "volatile_claims": [],
-  "contradiction": "2026-10-11 T-20261011-1: execute_luau sandbox (reported for 0.741) not reproduced on 0.742; SKILL.md softened, next refresh should confirm whether Roblox lifted or scoped it",
-  "events": [],
+  "contradiction": null,
+  "events": [
+    {
+      "date": "2026-10-17",
+      "note": "recheck Anthropic plugin directory for Roblox Studio plugin"
+    }
+  ],
   "streak": {
     "quiet": 0,
     "pinned_min": 0,
@@ -32,21 +37,27 @@
       "m": null,
       "interval_after": 14,
       "note": "created"
+    },
+    {
+      "date": "2026-10-11",
+      "m": 0.6,
+      "interval_after": 14,
+      "note": "execute_luau sandbox rolled back by staff 2026-10-02; contradiction settled"
     }
   ],
   "counts": {
-    "learnings": 1,
-    "changes": 2,
-    "research": 6,
-    "tests": 3
+    "learnings": 5,
+    "changes": 4,
+    "research": 8,
+    "tests": 4
   },
   "consolidate_every": 25,
   "tests": {
-    "last_run": "2026-10-10T23:55",
-    "harness": "evergreen-tester subagents, one run per case",
-    "env": "dev-machine",
-    "cases": 4,
-    "passed": 4,
+    "last_run": "2026-10-11T14:00",
+    "harness": "native Studio MCP tools, headless claude -p",
+    "env": "dev-machine, Studio 0.742",
+    "cases": 5,
+    "passed": 5,
     "failed": 0,
     "failing": [],
     "last_failure": null,

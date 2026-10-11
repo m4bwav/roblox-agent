@@ -18,7 +18,23 @@ Write an entry the moment a real signal happens: a user correction, the same err
 - Trigger: first live connection; the skill told the agent to read a `studio_id` from the list, which has none.
 - Hypothesis: the list returns `{"id","name"}` and every other tool's schema asks for `studio_id`.
 - Rule: take `id` from `list_roblox_studios` and pass it as `studio_id`. A Claude Code session started before `claude mcp add` does not load the tools; probe over stdio or restart.
-- Evidence: T-20261011-1
+- Evidence: T-20261011-1, T-20261011-2
+- Scope: global
+- Status: active · helpful 2 · harmful 0 · last_confirmed 2026-10-11
+
+### L-004 · 2026-10-11 · A local-scope MCP entry is keyed by the exact path, drive-letter case included
+- Trigger: `Roblox_Studio` was registered at local scope for `D:/work/project`; a VS Code session opened as `d:\work\project` listed no Roblox server and loaded no tools, while `claude mcp list` run from the upper-case path showed it connected.
+- Hypothesis: Claude Code stores local-scope servers under the project path string in `~/.claude.json` and matches it case-sensitively on Windows; VS Code can hand over a lower-case drive letter.
+- Rule: when the Studio tools are missing, run `claude mcp list` from the session's own working directory and compare the path under `projects` in `~/.claude.json`. Fix by starting the session from the same-case path, or register at project scope (`.mcp.json`). A headless `claude -p --allowedTools mcp__Roblox_Studio` from the right path also works.
+- Evidence: T-20261011-2
+- Scope: global (Windows)
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
+### L-005 · 2026-10-11 · execute_luau returns only the first return value
+- Trigger: `return game.Name, game.PlaceId, ...` came back as `Place1` alone.
+- Hypothesis: the tool stringifies the first value of the chunk's results.
+- Rule: build one string (`string.format` or `table.concat`) and return that.
+- Evidence: T-20261011-2
 - Scope: global
 - Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
 

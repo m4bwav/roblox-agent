@@ -4,6 +4,16 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-3 · 2026-10-11 · Refresh: sandbox described as a rolled-back flag, eval case for its return
+- because: R-20261011-3
+- files: SKILL.md Step 2 (item 5), Step 3 (sandbox rule); RESEARCH.md current understanding, open questions, search plan; evals/evals.json (outcome-2)
+- The sandbox is a server-side flag Roblox turned on and rolled back twice; the agent names the error, routes around it, and never suggests flag overrides. Contradiction flag cleared.
+
+### C-20261011-2 · 2026-10-11 · Native-tool test: sandbox absent in all data models, path-case note, single return value
+- because: T-20261011-2, R-20261011-2, L-004, L-005
+- files: SKILL.md Step 2 (item 5), Step 3 (sandbox rule, new execute_luau rule)
+- The sandbox rule now cites Edit, Server and Client; verification notes that a local-scope entry follows the exact path case; agents return one string from `execute_luau`.
+
 ### C-20261011-1 · 2026-10-11 · Live test: where the setting is, the id field, the sandbox claim softened
 - because: T-20261011-1, R-20261011-1, L-002, L-003
 - files: SKILL.md Step 2 (items 1 and 5), Step 3 (sandbox rule), Output
