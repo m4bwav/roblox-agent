@@ -1,5 +1,7 @@
 # roblox-agent
 
+![A small white robot arm placing a red block onto a miniature obstacle course of colorful toy blocks on a wooden workbench, tiny figures standing on the course, a laptop showing code and a checklist with a magnifying glass beside it](https://raw.githubusercontent.com/m4bwav/roblox-agent/main/.github/images/banner.jpg)
+
 Five self-maintaining ("evergreen") skills that teach an AI coding agent to build Roblox games: connect to
 Roblox Studio safely, keep the code on disk, check Luau without Studio, use Open Cloud, and write code that
 passes review. Written 2026-10-10 for Claude Code, GitHub Copilot, Cursor and Codex. The basis was a
@@ -150,4 +152,5 @@ Known limits:
 - The place-version endpoint is labeled beta.
 - Community star counts and download numbers are snapshots from the last refresh.
 
-License: MIT. Security: [SECURITY.md](SECURITY.md).
+License: MIT. Security: [SECURITY.md](SECURITY.md). The banner was made with Z-Image Turbo in ComfyUI; the
+workflow, prompt and seed are in `.github/images/`.

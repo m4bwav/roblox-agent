@@ -1,0 +1,3 @@
+Z-Image Turbo, banner-workflow.api.json (1536x640, 9 steps, cfg 1, res_multistep/simple), seed 22.
+
+wide cheerful photograph across a wooden workbench: a small white robot arm carefully placing one bright plastic block onto a miniature blocky game world built from colorful toy bricks, floating obstacle-course platforms, a tiny tower, little blocky toy figures standing on a green baseplate, beside it an open laptop whose screen shows soft out-of-focus lines of code, a paper checklist with green check marks and a magnifying glass, warm late afternoon window light from the left, shallow depth of field, tilt-shift miniature look, saturated playful colors, no text, no logos, no letters
