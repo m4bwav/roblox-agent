@@ -19,4 +19,8 @@ Append-only. Newest last.
 
 - First live run of roblox-agent-studio against Studio 0.742 on the dev machine, through a stdio probe of `mcp.bat` (the session predated the `claude mcp add`). 30 tools, one studio listed, playtest loop passed. `list_roblox_studios` returns `id`, not `studio_id`. The `execute_luau` sandbox reported for 0.741 did not show in Edit mode. Assistant sits behind a top-right button in the 2026 layout. Skill updated (C-20261011-1), contradiction flagged for the next refresh.
 
+## 2026-10-11 (native tools test, raw results)
+
+- Studio MCP probe on Place1 through the native `mcp__Roblox_Studio__*` tools: every `execute_luau` sandbox probe (Edit, Server, Client) returned `G=table | createScript=true`. `script_read` after `multi_edit` read back `print("probe v2")` straight away. The console showed `probe v2` during play. Cleanup returned `found=true | remaining=0 | children=1`; the remaining child, `DestroyHelperUI` (Script), was in ServerScriptService before the run and was left alone.
+
 Related: [INDEX.md](INDEX.md)
