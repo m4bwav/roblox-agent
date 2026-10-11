@@ -8,6 +8,12 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261011-1 · 2026-10-11 · live probe, stdio client against mcp.bat (read-only, then the playtest loop on an unsaved template place) · Windows 11 dev machine, Studio 0.742.0.7421053, Claude Code manual local entry · 5/5
+- connection pass: 30 tools; `list_roblox_studios` returned `{"studios":[{"id":"8d342c41-...","name":"Place1"}]}`; `get_studio_state` Edit mode
+- playtest loop pass: `start_stop_play` true → "Game Started", state Play with Client and Server; `execute_luau` Server returned "1 players, gravity 196.2"; `get_console_output` showed the probe's own print; stop → Edit again
+- sandbox claim not reproduced: in Edit, `_G` was a table and a new Script parented to ServerScriptService without error (then destroyed; read-back found nothing left)
+- led to: L-002, L-003, R-20261011-1, C-20261011-1
+
 ### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
 - trigger-2 pass, decoy-1 pass
 - led to: none

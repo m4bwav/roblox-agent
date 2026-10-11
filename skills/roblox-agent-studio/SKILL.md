@@ -23,20 +23,20 @@ Pick the lowest rung that covers the job and say which one in one line:
 
 Studio must be open on Windows or macOS with a place loaded. There is no Linux Studio. The server is inside Studio. It runs over stdio and listens on local port 13469.
 
-1. In Studio: Assistant, then `...`, then Manage MCP Servers (newer builds: Settings, then MCP Servers), then turn on "Enable Studio as MCP server". The setting belongs to the Roblox account and has switched itself off after Studio updates, so check it again after any update.
+1. Open a place first: the setting is not reachable from the start page. In Studio: Assistant, then `...`, then Manage MCP Servers (newer builds: Settings, then MCP Servers), then turn on "Enable Studio as MCP server". In the 2026 layout (menus File, Edit, View, Plugins, Test, Window, Help), Assistant is not under View; it is a button at the top right of the window, next to Collaborate (L-002). The setting belongs to the Roblox account and has switched itself off after Studio updates, so check it again after any update.
 2. Prefer Roblox's official plugin, `Roblox/roblox-studio-agent-plugin` (MIT, first published 2026-10-07; Claude Code, Codex, Cowork). It registers the server for both operating systems (the entry for the other OS always shows as failed, which is expected) and adds a `roblox-get-started` skill. Claude Code: run `/plugin`, search for "Roblox Studio" and install it; `/mcp` then lists `plugin:roblox-studio:macos` and `plugin:roblox-studio:windows`. Codex: `codex plugin marketplace add Roblox/roblox-studio-agent-plugin`, then `/plugins`. The user installs it; the agent never does. If `/plugin` does not find it (the repository has no Claude marketplace file of its own), fall back to step 3.
 3. Without the plugin, add one entry by hand at local scope:
    - Windows: `claude mcp add --scope local Roblox_Studio -- cmd.exe /c "cd /d %LOCALAPPDATA%\Roblox && .\mcp.bat"` (the batch file must run from its own folder).
    - macOS: `claude mcp add --scope local Roblox_Studio -- /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP` (or the same under `~/Applications`).
    - Other clients: Studio's Quick Connect writes the entry for Claude Code, Claude Desktop, Codex CLI, Cursor, Gemini CLI, VS Code and Antigravity.
 4. Never register a second Studio server next to the plugin's: the tools appear twice and calls go to whichever loads first. Check `claude mcp list` before adding anything.
-5. Verify: call `list_roblox_studios`. Its result (one entry per open Studio, each with a `studio_id`) is the evidence. An empty list means Studio is closed, no place is open, or the setting is off. A config entry alone proves nothing.
+5. Verify: call `list_roblox_studios`. Its result (`{"studios":[{"id":...,"name":...}]}`, one entry per open Studio; pass that `id` as `studio_id` to the other tools) is the evidence. A client started before the entry was added does not load its tools until it restarts. An empty list means Studio is closed, no place is open, or the setting is off. A config entry alone proves nothing.
 
 ## Step 3: working rules
 
 - Pass `studio_id` on every call. One client can drive several Studios, and since 2026-08 every tool needs the id.
 - Read before you edit. `script_read` and `script_grep` have returned stale source on large scripts. Re-read the exact lines right before a `multi_edit`, keep each edit small, and avoid anchors on aligned whitespace (padded `=` signs make `multi_edit` fail repeatedly).
-- `execute_luau` runs in a capability-restricted sandbox from Studio 0.741. It cannot `require` unsandboxed ModuleScripts, `_G` is nil, and creating or reparenting scripts fails with an error about Capabilities. When that happens, say it is the sandbox, not a refusal. Write the script through `multi_edit` or into a synced file instead.
+- `execute_luau` was reported to run in a capability-restricted sandbox from Studio 0.741: no `require` of unsandboxed ModuleScripts, `_G` nil, and creating or reparenting scripts failing with an error about Capabilities. A live test on 0.742.0.7421053 (Windows, 2026-10-11) did not reproduce it: `_G` was a table and a new Script parented to ServerScriptService without error (T-20261011-1). So try the direct call first. If it fails with a Capabilities error, say it is the sandbox, not a refusal. Write the script through `multi_edit` or into a synced file instead.
 - Edit-mode tools fail while a playtest runs. Stop the playtest (`start_stop_play`) and confirm with `get_studio_state` before editing.
 - There is no batch undo for agent edits. Before a multi-script change, have the user commit or save a copy of the place, or keep the change in synced files where Git can undo it.
 - Search tools cap their results (`script_search` top 10, `script_grep` top 50). For a project-wide refactor, work on synced files with ripgrep instead.
@@ -61,7 +61,7 @@ The built-in server is the default. `Chrrxs/robloxstudio-mcp` (MIT, npm `@chrrxs
 
 ## Output
 
-The rung chosen, the connection evidence (`list_roblox_studios` output with the studio_id used), and for every edit the read-back or playtest output that shows it worked.
+The rung chosen, the connection evidence (`list_roblox_studios` output with the `id` used as `studio_id`), and for every edit the read-back or playtest output that shows it worked.
 
 ## While working: capture learnings
 
