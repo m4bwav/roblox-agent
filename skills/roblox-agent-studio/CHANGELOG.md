@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-5 · 2026-10-11 · Learnings: proxy attach delay, driving Studio from a plain client
+- because: L-006, L-007
+- files: LEARNINGS.md
+- Two entries from building a large place through the proxy; SKILL.md unchanged (size budget).
+
 ### C-20261011-4 · 2026-10-11 · Trim: troubleshooting list and other servers moved to a reference
 - because: size budget (SKILL.md 2,748 tokens, over the 2,500 green line)
 - files: SKILL.md Step 2 (item 5), Step 5, Step 6; new references/troubleshooting-and-servers.md

@@ -6,6 +6,14 @@ Write an entry the moment a real signal happens: a user correction, the same err
 
 ## Active
 
+### L-001 · 2026-10-11 · The type check passes properties that throw when a script writes them
+- Trigger: `luau-lsp analyze` with the Roblox definitions passed a builder that set `workspace.Terrain.Decoration = true`; at run time it threw "Decoration is not a valid member of Terrain" and stopped the whole terrain build, so the place played with no ground.
+- Hypothesis: the definitions list some properties scripts cannot write (Studio-only or not scriptable), so static checks cannot catch them.
+- Rule: after the static checks, run new engine-facing code once in Studio (`execute_luau` in Edit) or a playtest and read `get_console_output` before calling it done; treat a clean type check as necessary, not sufficient.
+- Evidence: live session 2026-10-11 (rbx_check all pass; console error in Play)
+- Scope: global
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
 <!-- Example (delete once you have a real entry):
 ### L-001 · 2026-10-10 · One-line lesson in plain words
 - Trigger: what happened, with dates or counts
