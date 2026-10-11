@@ -28,4 +28,10 @@ Append-only. Newest last.
 
 - Studio MCP probe on Place1 through the native `mcp__Roblox_Studio__*` tools: every `execute_luau` sandbox probe (Edit, Server, Client) returned `G=table | createScript=true`. `script_read` after `multi_edit` read back `print("probe v2")` straight away. The console showed `probe v2` during play. Cleanup returned `found=true | remaining=0 | children=1`; the remaining child, `DestroyHelperUI` (Script), was in ServerScriptService before the run and was left alone.
 
+## 2026-10-11 (PR #5 merged, studio skill trimmed)
+
+- PR #5 conflicted with PR #4 only in this log (the raw-results bullet was in both); merged main into the branch keeping one copy, CI passed, merged at the owner's request.
+- Trimmed roblox-agent-studio SKILL.md from 2,748 to 2,465 tokens (budget back to GREEN) by moving the troubleshooting list and the other-servers detail to references/troubleshooting-and-servers.md (C-20261011-4). trigger-2 and the new outcome-2 passed on the trimmed copy (T-20261011-3). Plugin bumped to 0.1.3, untagged until the PR merges.
+- The "banners still missing" list in the private next-session prompt was stale: unity-agent, wikiwright, chartwright, threewright, readwright, skill-tidy, context-health and everscout all already have `.github/images/banner.jpg` and a README banner line (checked on GitHub).
+
 Related: [INDEX.md](INDEX.md)

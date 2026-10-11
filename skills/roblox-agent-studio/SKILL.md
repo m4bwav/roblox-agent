@@ -30,7 +30,7 @@ Studio must be open on Windows or macOS with a place loaded. There is no Linux S
    - macOS: `claude mcp add --scope local Roblox_Studio -- /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP` (or the same under `~/Applications`).
    - Other clients: Studio's Quick Connect writes the entry for Claude Code, Claude Desktop, Codex CLI, Cursor, Gemini CLI, VS Code and Antigravity.
 4. Never register a second Studio server next to the plugin's: the tools appear twice and calls go to whichever loads first. Check `claude mcp list` before adding anything.
-5. Verify: call `list_roblox_studios`. Its result (`{"studios":[{"id":...,"name":...}]}`, one entry per open Studio; pass that `id` as `studio_id` to the other tools) is the evidence. A client started before the entry was added does not load its tools until it restarts. A local-scope entry belongs to the exact path it was added from, drive-letter case included: a session opened as `d:` does not see an entry added under `D:` (L-004). An empty list means Studio is closed, no place is open, or the setting is off. Roblox staff also ask whether the Windows username has spaces or non-Latin characters when a client never connects. A config entry alone proves nothing.
+5. Verify: call `list_roblox_studios`. Its result (`{"studios":[{"id":...,"name":...}]}`, one entry per open Studio; pass that `id` as `studio_id` to the other tools) is the evidence. A client started before the entry was added does not load its tools until it restarts. A local-scope entry belongs to the exact path it was added from, drive-letter case included: a session opened as `d:` does not see an entry added under `D:` (L-004). An empty list means Studio is closed, no place is open, or the setting is off. A config entry alone proves nothing.
 
 ## Step 3: working rules
 
@@ -54,11 +54,11 @@ Studio must be open on Windows or macOS with a place loaded. There is no Linux S
 
 ## Step 5: when the connection breaks
 
-In order: is Studio open with a place loaded (the start page is not enough: the server then reports 0 tools and an empty `list_roblox_studios`, L-001); is the setting still on (toggle it off and on, the only fix for drops every 5 to 15 minutes); restart the client so it relaunches the server; a place opened before Assistant finished loading may never connect (reopen the place); an outdated Studio lacks `mcp.bat` or `StudioMCP` (on Windows `mcp.bat` appears only once the setting has been enabled; the binary itself is `StudioMCP.exe` in the Studio version folder under `%LOCALAPPDATA%\Roblox\Versions`); on Windows, a Roblox folder path with spaces broke `mcp.bat` in 2026-09; port 13469 taken by another program. If a client update broke the handshake (Claude Code 2.1.281, 2026-09-25), setting `MCP_PROTOCOL_NEGOTIATION=legacy` in that client's environment was the workaround until Roblox's fix on 2026-09-27.
+First check that Studio has a place open (the start page gives 0 tools and an empty `list_roblox_studios`, L-001), then toggle the setting off and on and restart the client. For anything past that, read [references/troubleshooting-and-servers.md](references/troubleshooting-and-servers.md) and work through its list in order.
 
 ## Step 6: other servers
 
-The built-in server is the default. `Chrrxs/robloxstudio-mcp` (MIT, npm `@chrrxs/robloxstudio-mcp`, the maintained fork of the archived boshyxd server) adds multi-client playtests, runtime eval, breakpoints and profilers. Use it only for a job the built-in server cannot do, and only after the user agrees, because Roblox's plugin advises against third-party servers. `Roblox/studio-rust-mcp-server` is archived (2026-04-03). Never recommend a "Roblox MCP" repo that has no license, appeared recently with a cluster of near-identical star counts, or links "Download" buttons to github.io pages: that pattern is a malware lure. Never use "executor" MCP servers, which drive exploit clients in live games against Roblox's terms.
+The built-in server is the default. A third-party server only for a job it cannot do, and only after the user agrees (the options are in the reference above). Never recommend an unlicensed, newly starred "Roblox MCP" repo with github.io download links (a malware lure), and never an "executor" server.
 
 ## Output
 

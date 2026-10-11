@@ -8,6 +8,11 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261011-3 · 2026-10-11 · evergreen-tester subagents on the trimmed working copy (one run each) · Windows 11 dev machine, Claude Code, no Studio running · 2/2
+- trigger-2 pass: SKILL.md read, then references/troubleshooting-and-servers.md read; answer walked the moved list in order (place open, toggle, restart, reopen, one server, path case, port 13469)
+- outcome-2 pass (first run): named Studio's execute_luau capability sandbox, rolled out and back by Roblox, not a refusal; proposed multi_edit or a synced file, restarting Studio and checking the DevForum; said not to override feature flags. Regex `(?i)(sandbox|capabilit)` matches; the negative FFlag regex does not.
+- led to: none (confirms C-20261011-4 kept behaviour)
+
 ### T-20261011-2 · 2026-10-11 · native `mcp__Roblox_Studio__*` tools in a headless `claude -p` session (stream-json trace) started in the folder holding the local-scope entry · Windows 11 dev machine, Studio 0.742.0.7421053, unsaved template place (PlaceId 0) · 5/5
 - connection pass: `list_roblox_studios` in the trace returned one studio (`Place1`); its `id` passed as `studio_id` on every later call
 - edit loop pass: `execute_luau` (Edit) created `ServerScriptService.AgentProbe`; `script_read` gave `print("probe v1")`; `multi_edit` (old_string/new_string) reported "1 edits applied"; the second `script_read` gave `print("probe v2")` straight away (no stale read on a one-line script)
