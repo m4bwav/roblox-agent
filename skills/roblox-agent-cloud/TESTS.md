@@ -8,6 +8,14 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261011-1 · 2026-10-11 · live Open Cloud run, rbx_cloud.py by hand · Windows 11 dev machine, real API, private test experience · 5/6
+- run (tiny task) pass: COMPLETE, typed results, print and warn in logs
+- run (error task) pass: FAILED, SCRIPT_ERROR, exit 1
+- publish Saved fail then pass: 409 while Studio had the place open (L-002), then versions 4 and 5
+- run-jest.luau fail then pass: loadstring unavailable (L-001), then 2/2 tests passed with LoadStringEnabled
+- rate probe pass: 40 creations in 10 minutes accepted
+- led to: L-001, L-002, L-003, C-20261011-1, R-20261011-1
+
 ### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
 - trigger-1 pass, decoy-1 pass
 - led to: none

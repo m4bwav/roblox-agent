@@ -34,4 +34,10 @@ Append-only. Newest last.
 - Trimmed roblox-agent-studio SKILL.md from 2,748 to 2,465 tokens (budget back to GREEN) by moving the troubleshooting list and the other-servers detail to references/troubleshooting-and-servers.md (C-20261011-4). trigger-2 and the new outcome-2 passed on the trimmed copy (T-20261011-3). Plugin bumped to 0.1.3, untagged until the PR merges.
 - The "banners still missing" list in the private next-session prompt was stale: unity-agent, wikiwright, chartwright, threewright, readwright, skill-tidy, context-health and everscout all already have `.github/images/banner.jpg` and a README banner line (checked on GitHub).
 
+## 2026-10-11 (live Open Cloud run, v0.1.3 released)
+
+- PR #6 was merged; tagged v0.1.3, release workflow passed, release live.
+- First real Open Cloud run with a scoped key on a private test experience (T-20261011-1 and R-20261011-1 in roblox-agent-cloud): Luau Execution results and logs match the skill; error tasks give FAILED with SCRIPT_ERROR; Saved upload returned versions 4 and 5. Uploads got 409 "Server is busy" while Studio had the place open (L-002). Jest Roblox 3.20.1 (`roblox/jest`, L-003) passed 2/2 once the test place set LoadStringEnabled (L-001). The DevForum "30 creations an hour" lead did not reproduce: 40 in 10 minutes were accepted. Skill and run-jest.luau fixed (C-20261011-1); plugin 0.1.4.
+- Toolchain on the dev machine: Rokit 1.2.0 (self-installed to the user profile), Rojo 7.7.1 and Wally 0.3.2 as global tools.
+
 Related: [INDEX.md](INDEX.md)

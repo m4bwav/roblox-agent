@@ -32,13 +32,19 @@
       "m": null,
       "interval_after": 14,
       "note": "created"
+    },
+    {
+      "date": "2026-10-11",
+      "m": 2,
+      "interval_after": 14,
+      "note": "live Open Cloud run"
     }
   ],
   "counts": {
-    "learnings": 0,
-    "changes": 0,
-    "research": 4,
-    "tests": 3
+    "learnings": 3,
+    "changes": 1,
+    "research": 5,
+    "tests": 4
   },
   "consolidate_every": 25,
   "tests": {

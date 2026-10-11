@@ -10,13 +10,12 @@ Topic: Roblox Open Cloud for agents (Luau Execution, engine tests, place version
 - Place versions: `POST /universes/v1/{universeId}/places/{placeId}/versions?versionType=Saved|Published`, `Content-Type: application/octet-stream` (rbxl) or `application/xml` (rbxlx), scope universe-places write, returns `{"versionNumber": n}`. Labeled BETA in the docs on 2026-10-10. Does not update EditableImage, EditableMesh, PartOperation, SurfaceAppearance or BaseWrap.
 - Engine tests: Jest Roblox (Roblox/jest-roblox, 3.20.0) runs inside Roblox, including through Luau Execution; runners jest-roblox-cli 0.4.6 (`@isentinel/jest-roblox`, Open Cloud, attached-Studio and headless-Studio backends, agent and JSON output) and Roblox/rocale-cli 0.1.0; GitHub actions thegamerbay/roblox-luau-execution-action and grand-hawk/action-roblox-luau-execution. rbxcloud 0.17.0 (2025-03) is quiet but works.
 - 2026 changes: Analytics, Events, Experiments and Thumbnails APIs (2026-08-24), Transaction Refunded webhook (2026-09-23), unified data store budget and 500 MB plus 1 MB per lifetime player storage (2026-07-29); cookie and unauthenticated web API limits for six services drop sharply after 2026-10-19; thumbnails return 200 with an `error` object instead of 503 from 2026-10-26. Machine-readable docs: `/docs/cloud/openapi.json` and `/docs/cloud/llms.txt`.
-- rbx_cloud.py (this skill) passed six tests against a fake Open Cloud server (create, poll, logs, wrong key, Saved upload, Published guard, missing key, dry run). It has not yet run against the real API.
+- rbx_cloud.py (this skill) passed six tests against a fake Open Cloud server, and ran against the real API on 2026-10-11 (R-20261011-1): `output.results` is a JSON array of the return values (tables become objects or arrays), logs come back as `messages`, a script error gives `state: FAILED` with `error.code: SCRIPT_ERROR`, Saved upload returns a `versionNumber`, and Jest Roblox 3.20.1 passed through run-jest.luau once the test place set `LoadStringEnabled`.
 
 ## Open questions
 
-- Run rbx_cloud.py against a real test place: does `output.results` come back as a JSON array of the returned values as the docs suggest?
 - Is the place-version endpoint's BETA label new, and is a v2 replacement coming ("Open Cloud APIs for AI tools", delayed to late 2026; "Unified agentic permission" for Assistant, MCP, plugins and Luau Execution)?
-- Does run-jest.luau work unchanged with Jest Roblox 3.20 (`runCLI(...):awaitStatus()` and `results.numFailedTests`)?
+- Does a task-creation limit beyond 5 a minute exist at higher rates (40 in 10 minutes passed on 2026-10-11)?
 
 ## Search plan
 
@@ -42,6 +41,14 @@ Testing:
 Best sources: Roblox Open Cloud docs (`.md` and openapi.json), DevForum Announcements, the runners' repositories. Noisy: third-party API wrappers' READMEs that lag the docs.
 
 ## Findings log
+
+### R-20261011-1 · 2026-10-11 · Live run: Luau Execution, Saved upload and Jest Roblox against a real test place
+- Source: live runs with a scoped key on a private test experience (universe and place ids in the private sidecar), rbx_cloud.py from this skill; Wally index for package names.
+- Results: `[42, "text", true, {parts, list, version}]` came back as typed JSON; `print` and `warn` lines both in `logs`; engine 0.742. A script `error()` gave `FAILED`, `{code: SCRIPT_ERROR, message: "TaskScript:2: ..."}` and the stack in the logs. Saved uploads returned versions 4 and 5.
+- Upload refused with HTTP 409 "Server is busy and unable to process your upload request" twice, 90 seconds apart, while Studio had the place open; accepted at once after Studio closed it.
+- Jest Roblox: Wally publishes 3.20.x only as `roblox/jest` and `roblox/jest-globals` (`jsdotlua/jest` stops at 3.10.0). Without `ServerScriptService.LoadStringEnabled` every suite fails with "loadstring() is not available" and Jest reports 0 tests; with it, 2 of 2 passed. run-jest.luau now counts failed suites.
+- Rate: 40 task creations at one per 15 seconds, all accepted (44 that day); the DevForum "about 30 an hour" lead did not reproduce.
+- Magnitude: m2 (procedure fixes in Step 3 and Step 4; no API change)
 
 ### R-20261010-4 · 2026-10-10 · Testing: fake-server tests for rbx_cloud.py
 - summary: A local HTTP server reproduces create, poll (PROCESSING then COMPLETE), logs, a 401 for a wrong key and a place upload; the script passes, never prints the key, and refuses Published without `--yes`. Live API run still owed.

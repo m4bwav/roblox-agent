@@ -28,12 +28,12 @@ python <this skill>/scripts/rbx_cloud.py run --universe <id> --place <id> [--ver
 
 - The script's `return` values come back in `results`, and `print` and `warn` output comes back in `logs` (last 200 lines). Exit 0 when the task completed, 1 when it failed or the API refused (the JSON holds the HTTP code and Roblox's message), 2 for a usage error.
 - `--dry-run` prints the request without sending it and needs no key. Use it to show the user what will run.
-- Limits (docs, 2026-10-10): a task runs at most 5 minutes; 10 tasks at once per place; 5 task creations a minute per key owner; script up to 4 MB; results up to 4 MB; logs keep 450 KB; task data is kept 24 hours. The script polls every 3 seconds.
+- Limits (docs, 2026-10-10): a task runs at most 5 minutes; 10 tasks at once per place; 5 task creations a minute per key owner; script up to 4 MB; results up to 4 MB; logs keep 450 KB; task data is kept 24 hours. The script polls every 3 seconds. A DevForum report of about 30 creations an hour did not hold: 40 creations in 10 minutes (15 seconds apart) were all accepted on 2026-10-11.
 - The task runs with the full engine API against the place version given, or the latest. Changes are lost unless the script calls `SavePlaceAsync`, and it should not do that without the user's yes.
 
 ## Step 3: engine tests in CI (Jest Roblox)
 
-1. Build a test place that includes the tests and Jest Roblox (`roblox/jest` from Wally): `rojo build test.project.json -o test.rbxl`.
+1. Build a test place that includes the tests, a `jest.config` module in the test root, and Jest Roblox (`roblox/jest` and `roblox/jest-globals` from Wally; the older `jsdotlua/jest` name stops at 3.10). Set `ServerScriptService.LoadStringEnabled` in the project (`"ServerScriptService": { "$properties": { "LoadStringEnabled": true } }`): Jest loads specs with `loadstring`, and without it every suite fails with "loadstring() is not available". Then `rojo build test.project.json -o test.rbxl`.
 2. Store it as a new version of the test place: `rbx_cloud.py publish --universe <id> --place <test place> --file test.rbxl` (Saved by default). Note the `versionNumber`.
 3. Run the test entry script against that version: `rbx_cloud.py run ... --version <n> --script references/run-jest.luau`. It returns the pass and fail counts, and a failing test makes the task fail.
 4. Treat the counts in `results` as the evidence. A completed task with zero tests found is a failure of the setup, not a pass.
@@ -47,6 +47,7 @@ python <this skill>/scripts/rbx_cloud.py publish --universe <id> --place <id> --
 ```
 
 - `Saved` stores a version and players do not see it. `Published` makes it live, so the script refuses it without `--yes`, and the agent passes `--yes` only after the user says so in this conversation.
+- HTTP 409 "Server is busy and unable to process your upload request" came back while Studio had the place open (live run, 2026-10-11) and cleared once Studio closed it. Ask the user to close the place in Studio before retrying.
 - The endpoint (`POST /universes/v1/{universeId}/places/{placeId}/versions`) is labeled beta in the docs. It does not update EditableImage, EditableMesh, PartOperation, SurfaceAppearance or BaseWrap instances: publish those from Studio.
 
 ## Step 5: other Open Cloud work
