@@ -14,15 +14,14 @@ Write an entry the moment a real signal happens: a user correction, the same err
 - Scope: global
 - Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
 
-### L-001 · 2026-10-11 · Lune cannot write terrain, and parts laid on smooth terrain sink unless it is carved
-- Trigger: a place generated with Lune (`@lune/roblox`, `serializePlace`) from map data: terrain voxels cannot be written there, so a builder module made the terrain with `WriteVoxels` in Studio. Paths, pool decks and court pads placed at the height-map height then sat 0.3 to 0.7 studs under the rendered surface, invisible; carving a strip narrower than two 4-stud voxels did not help.
-- Hypothesis: `WriteVoxels` occupancy plus smoothing puts the surface up to about a voxel off the source height, and a narrow carve is averaged back up by its neighbours.
-- Rule: ship terrain as data plus a builder (bake once in Studio, and build at server start if missing). Under every part that must show on the ground, lower the height map at least one extra voxel (4 studs) beyond the part's edge and 1.5 to 2.5 studs below its top, and give the part enough thickness to hide the step. Check with a raycast against Terrain, part top minus terrain height, before looking at screenshots.
-- Evidence: live session 2026-10-11 (probe: before -0.3 to -0.7 studs, after +1 to +2.8)
+### L-001 · 2026-10-11 · Smooth terrain draws its surface half a voxel above a linear occupancy; shift it, then carve only a little
+- Trigger: a place generated with Lune (`@lune/roblox`, `serializePlace`) from map data: terrain voxels cannot be written there, so a builder module made the terrain with `WriteVoxels` in Studio, occupancy `(h - voxelBottom) / 4`. Paths, pads and a new asphalt street surface laid at the height-map height sat under the rendered ground; a 2-stud carve under the street still left terrain 0.1 stud above the asphalt. A calibration patch (full voxel, then occupancy o, then air, raycast the middle) measured the surface at voxel bottom + 2 + 4 * o, exactly linear, so every column drew 2 studs above its height.
+- Hypothesis: Roblox treats occupancy as centred on the voxel, not filling it from the bottom.
+- Rule: ship terrain as data plus a builder (bake once in Studio, and build at server start if missing), and write occupancy as `clamp((h - voxelBottom) / 4 - 0.5, 0, 1)` so the drawn surface lands on h. Then parts placed at the height-map height sit on the ground: carve only 0.4 to 0.8 studs under hard surfaces, about half a voxel past the edge, and hide the edge with a curb or border part. Check with a raycast against Terrain (part top minus terrain height) before looking at screenshots.
+- Evidence: live session 2026-10-11 (before the fix: heightmap 10.06, drawn 12.12; after: drawn 11.28 under asphalt at 12.04); calibration 0.0 to 1.0 in steps of 0.1, every step +0.40 stud
 - Scope: global
-- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+- Status: active · helpful 2 · harmful 0 · last_confirmed 2026-10-11
 
-<!-- Example (delete once you have a real entry):
 ### L-001 · 2026-10-10 · One-line lesson in plain words
 - Trigger: what happened, with dates or counts
 - Hypothesis: why

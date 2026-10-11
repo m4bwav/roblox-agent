@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-6 · 2026-10-11 · Learning: blank captures and missing SurfaceGuis
+- because: L-008
+- files: LEARNINGS.md
+- From checking a sign and streets in a large place; SKILL.md unchanged (size budget).
+
 ### C-20261011-5 · 2026-10-11 · Learnings: proxy attach delay, driving Studio from a plain client
 - because: L-006, L-007
 - files: LEARNINGS.md
