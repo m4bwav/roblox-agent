@@ -46,6 +46,22 @@ Write an entry the moment a real signal happens: a user correction, the same err
 - Scope: global (Windows; macOS unverified)
 - Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
 
+### L-006 · 2026-10-11 · Studio attaches to a fresh MCP proxy a few seconds after it starts
+- Trigger: a level-building session started `mcp.bat` per command and called `list_roblox_studios` straight after `initialize`; it got `{"studios":[]}` for about 15 minutes although Studio had a place open and "Enable Studio as MCP server" was on (the settings panel read "No clients connected"). Holding one connection open and asking again returned the Studio on the second call, about 4 seconds later.
+- Hypothesis: Studio polls for the proxy and connects only after the proxy has been up for a few seconds, so a client that asks once and exits never sees it.
+- Rule: after starting the proxy, poll `list_roblox_studios` every 2 seconds for up to 30 before deciding no Studio is attached; check the setting only after that.
+- Evidence: live session 2026-10-11 (Studio 0.742, Windows 11)
+- Scope: global (Windows; macOS unverified)
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
+### L-007 · 2026-10-11 · A plain stdio JSON-RPC client can drive Studio without an agent harness
+- Trigger: the Roblox tools were not loaded in the agent session (L-004), so a 60-line Python client spoke MCP to `mcp.bat` directly: `initialize`, `notifications/initialized`, then `tools/call`.
+- Hypothesis: the proxy is an ordinary stdio MCP server; nothing in it is tied to one client.
+- Rule: when the tools are missing from a session, a script can call them itself. `screen_capture` takes `capture_id`, `camera_position` and `look_at_position` and returns a base64 image to save and inspect. `execute_luau` in Edit accepted code of about 180,000 characters per call and can set `Script.Source`, so a whole generated build (parts in batches, ModuleScripts) can be pushed into the open place, about 10,000 parts in under 2 seconds.
+- Evidence: live session 2026-10-11, about 30 calls
+- Scope: global
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
 <!-- Example (delete once you have a real entry):
 ### L-001 · 2026-10-10 · One-line lesson in plain words
 - Trigger: what happened, with dates or counts

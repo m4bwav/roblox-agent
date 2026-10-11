@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-2 · 2026-10-11 · Learning: a clean type check does not prove engine writes work
+- because: L-001
+- files: LEARNINGS.md
+- First real entry, from a terrain builder that type-checked but threw in Studio.
+
 ### C-20261010-2 · 2026-10-10 · A missing --defs file is a usage error
 - because: the 0.1.1 wiki run (ai-docs/notes/2026-10-10-wiki-run, gap 1): `--defs missing.d.luau` skipped the types check and reported ok true with exit 0
 - files: scripts/rbx_check.py (main), SKILL.md Step 1, tests/test_scripts.py
