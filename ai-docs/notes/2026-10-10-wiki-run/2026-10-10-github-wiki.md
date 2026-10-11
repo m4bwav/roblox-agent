@@ -55,9 +55,17 @@ Not tested:
 
 ## Gaps in the shipped behaviour (for 0.1.2)
 
+Gaps 1 and 2 were fixed in 0.1.2 (PR #1) and the wiki was updated for them on 2026-10-11 (see the update below). Gap 3 stands.
+
 1. `rbx_check.py --defs <missing file>` skips the types check and still reports `ok: true` with exit 0 (`check-no-defs` case). A path the user named that does not exist should be a usage error (exit 2). Documented on Checks and FAQ as a "watch for this".
 2. `rbx_cloud.py run --help` and `publish --help` list the flags with no descriptions (`cloud-help`, `cloud-publish-help`). The module docstring has them, but argparse shows none.
 3. The README's "Verified on a real machine" section still says no step of roblox-agent-studio ran against a live Studio. Since 0.1.1 the server handshake was probed; a session with a place open is still owed.
+
+## Update for 0.1.2 (2026-10-11)
+
+- Ran `2026-10-10-wiki-verify.py` against `git archive v0.1.2`. `diffout` showed one changed area, and only the three expected cases: `check-no-defs` (now `{"ok": false, "error": ...}`, exit 2), `cloud-help` and `cloud-publish-help` (descriptions on every flag). Saved the new output over `2026-10-10-wiki-verify.out.txt`.
+- Spliced the three outputs from the saved run into Checks and Open-Cloud by script (no retyping); rewrote the Checks and FAQ sentences about the skip; set 0.1.2 on Home, Development and the footer; Writing-Roblox-Code no longer names a version.
+- `check` 0 errors; `outputs` 34 checked, 0 missing, 3 skipped; `snippets` 0 missing; everwrite 0 strong. Wiki commit `230a387`; `live`: 10 pages, 0 failures, 4 anchor links, 0 broken.
 
 ## Updating the wiki later
 
@@ -66,8 +74,7 @@ Not tested:
 3. Regenerate Checks and Open-Cloud from the new output: copy those two pages back to `.tmpl` with `{{case:<label>}}` placeholders, or edit the changed blocks. Then run `wikiwright.py outputs <wiki dir> <new output> --address ''`, `snippets`, `check --version X.Y.Z` and the everwrite checker.
 4. Commit, push, then `wikiwright.py live m4bwav/roblox-agent <wiki dir>`. Pages that name the version:
    - Home ("About these pages");
-   - Checks (the "in 0.1.1" skip note);
-   - FAQ (the types-skip answer);
-   - Writing-Roblox-Code (the "0.1.1 cites" line);
+   - Checks (the 0.1.1 / 0.1.2 `--defs` note);
+   - FAQ (the types-skip answer, names 0.1.2);
    - Development (the checkout tag);
    - _Footer.
