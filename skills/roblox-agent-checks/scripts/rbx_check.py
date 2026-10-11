@@ -161,6 +161,10 @@ def main(argv):
             return 0
         print(json.dumps({"ok": False, "error": str(e)}))
         return 2
+    if a["defs"] and not Path(a["defs"]).expanduser().is_file():
+        # A file the user named that is not there is a mistake to report, not a check to skip.
+        print(json.dumps({"ok": False, "error": "--defs file not found: %s" % a["defs"]}))
+        return 2
     project = Path(a["project"]).resolve()
     report = {"ok": True, "project": project.name, "checks": {}}
     pf = project_file(project) if project.is_dir() else None

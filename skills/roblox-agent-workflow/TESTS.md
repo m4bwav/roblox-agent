@@ -8,6 +8,10 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261010-3 · 2026-10-10 · evergreen-tester subagents (one trigger case and one decoy, one run each) · Windows 11 dev machine, Claude Code · 2/2
+- trigger-2 pass (no file written), decoy-2 pass (no roblox-agent skill for an Express.js review)
+- led to: none
+
 ### T-20261010-2 · 2026-10-10 · evergreen-tester subagents (action and outcome cases, one run each) · Windows 11 dev machine, Claude Code, no Roblox Studio installed · 2/2
 - action-1 pass (skill invoked; fetched BodyVelocity.md and deprecated.md from create.roblox.com and cited both; noted the class page does not name the replacement)
 - outcome-1 pass (flagged that the client chooses the amount; server-side catalog price, type and range checks, cooldown, balance check)

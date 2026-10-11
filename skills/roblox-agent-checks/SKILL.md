@@ -20,7 +20,7 @@ python <this skill>/scripts/rbx_check.py <project dir> --fetch-defs [--lune test
 ```
 
 - Prints one JSON object: `ok`, `sources` (the `$path` folders read from the project file), `tools` found, and per check `status` (pass, fail or skip), `exit`, `seconds`, `command` and `output_tail`. Exit 0 when nothing failed, 1 when a check failed, 2 when the folder is not a Rojo project.
-- `--fetch-defs` downloads luau-lsp's `globalTypes.d.luau` (about 0.9 MB) once into the user cache (`%LOCALAPPDATA%\roblox-agent` or `~/.cache/roblox-agent`). Without it the types check is skipped with the reason. Ask before the first download if the user has said network calls need approval. `--defs <file>` uses a copy the project already has.
+- `--fetch-defs` downloads luau-lsp's `globalTypes.d.luau` (about 0.9 MB) once into the user cache (`%LOCALAPPDATA%\roblox-agent` or `~/.cache/roblox-agent`). Without it the types check is skipped with the reason. Ask before the first download if the user has said network calls need approval. `--defs <file>` uses a copy the project already has; a `--defs` path that does not exist is a usage error (exit 2) from 0.1.2.
 - `--only types,lint` or `--skip format` narrow the run. Build output and the sourcemap go to a temporary folder, so the check writes nothing into the project.
 - It finds tools on PATH or in `~/.rokit/bin`, and runs them from the project folder, because Rokit's shims resolve only where a manifest lists them.
 

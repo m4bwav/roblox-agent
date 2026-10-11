@@ -122,21 +122,26 @@ def cmd_publish(a, key):
 def main(argv):
     p = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = p.add_subparsers(dest="cmd")
+    helps = {"run": "run a Luau script on a Roblox server (Luau Execution) and print its results and logs",
+             "publish": "upload a .rbxl or .rbxlx file as a new place version"}
     for name in ("run", "publish"):
-        s = sub.add_parser(name)
-        s.add_argument("--universe", required=True)
-        s.add_argument("--place", required=True)
-        s.add_argument("--key-env", default="ROBLOX_API_KEY")
-        s.add_argument("--dry-run", action="store_true")
+        s = sub.add_parser(name, help=helps[name], description=helps[name])
+        s.add_argument("--universe", required=True, help="the experience's universe id (a number)")
+        s.add_argument("--place", required=True, help="the place id (a number)")
+        s.add_argument("--key-env", default="ROBLOX_API_KEY",
+                       help="environment variable that holds the Open Cloud API key (default ROBLOX_API_KEY)")
+        s.add_argument("--dry-run", action="store_true", help="print the request without sending it; no key needed")
         if name == "run":
-            s.add_argument("--version")
-            s.add_argument("--script", required=True)
-            s.add_argument("--timeout", type=int, default=300)
-            s.add_argument("--no-wait", dest="wait", action="store_false")
+            s.add_argument("--version", help="run against this place version (default: the latest)")
+            s.add_argument("--script", required=True, help="the Luau file to run")
+            s.add_argument("--timeout", type=int, default=300, help="task timeout in seconds (default 300, the maximum)")
+            s.add_argument("--no-wait", dest="wait", action="store_false",
+                           help="return as soon as the task is created, with its path to poll")
         else:
-            s.add_argument("--file", required=True)
-            s.add_argument("--type", choices=["Saved", "Published"], default="Saved")
-            s.add_argument("--yes", action="store_true")
+            s.add_argument("--file", required=True, help="the place file to upload")
+            s.add_argument("--type", choices=["Saved", "Published"], default="Saved",
+                           help="Saved (default) stores a version; Published makes it live for players")
+            s.add_argument("--yes", action="store_true", help="confirm a Published upload; the user must have agreed")
     try:
         a = p.parse_args(argv)
     except SystemExit as e:
