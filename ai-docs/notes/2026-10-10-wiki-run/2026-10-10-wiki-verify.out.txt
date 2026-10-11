@@ -1,0 +1,464 @@
+=== installed
+Python 3.14.6
+Rojo 7.7.1
+selene 0.32.0
+stylua 2.6.0
+1.70.1
+lune 0.10.5
+=== check-help
+$ python rbx_check.py --help
+Run the no-Studio checks on a Rojo-style Roblox project and print one JSON object.
+
+Usage (from anywhere; stdlib only, Python 3.9+):
+    python rbx_check.py [project_dir] [--fetch-defs] [--defs PATH] [--lune SCRIPT] [--only a,b] [--skip a,b]
+
+Checks, in order: build (rojo build), sourcemap (rojo sourcemap), lint (selene), format (stylua --check),
+types (luau-lsp analyze with the Roblox type definitions), lune (an optional Lune test script).
+Each is "pass", "fail" or "skip" (tool missing, nothing to check, or no type definitions) with its exit
+code, duration and the last lines of its output. Exit 0 when nothing failed, 1 when a check failed,
+2 for a usage error. It never raises: a crash is reported inside the JSON.
+
+Tools run from the project folder, because Rokit's shims only resolve inside a folder whose rokit.toml
+(or aftman.toml / foreman.toml) lists the tool. Build output and the sourcemap go to a temporary folder,
+so the check writes nothing into the project. --fetch-defs downloads luau-lsp's globalTypes.d.luau
+(about 0.9 MB) once into the user cache; without it the types check is skipped with the reason.
+$ echo $?
+0
+=== check-fixture
+$ python rbx_check.py place --fetch-defs --lune tests/greeting.spec.luau
+{
+  "ok": true,
+  "project": "place",
+  "checks": {
+    "build": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\rojo.EXE build default.project.json -o <tmp>\check.rbxl",
+      "output_tail": [
+        "Building project 'fixture-place'",
+        "Built project to check.rbxl"
+      ],
+      "output_lines": 2
+    },
+    "sourcemap": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\rojo.EXE sourcemap default.project.json -o <tmp>\sourcemap.json",
+      "output_tail": [
+        "Created sourcemap at <tmp>\sourcemap.json"
+      ],
+      "output_lines": 1
+    },
+    "lint": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\selene.EXE src/shared src/server src/client",
+      "output_tail": [
+        "Results:",
+        "0 errors",
+        "0 warnings",
+        "0 parse errors"
+      ],
+      "output_lines": 4
+    },
+    "format": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\stylua.EXE --check src/shared src/server src/client",
+      "output_tail": [],
+      "output_lines": 0
+    },
+    "types": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\luau-lsp.EXE analyze --platform=roblox --defs=<cache>\globalTypes.d.luau --ignore=**/_Index/** --sourcemap=<tmp>\sourcemap.json src/shared src/server src/client",
+      "output_tail": [
+        "[INFO] Loading definitions file: @roblox - <cache>\globalTypes.d.luau",
+        "[WARN] client does not allow didChangeWatchedFiles registration - automatic updating on sourcemap changes disabled"
+      ],
+      "output_lines": 2
+    },
+    "lune": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\lune.EXE run tests/greeting.spec.luau",
+      "output_tail": [
+        "greeting.spec: 2 passed"
+      ],
+      "output_lines": 1
+    }
+  },
+  "project_file": "default.project.json",
+  "sources": [
+    "src/shared",
+    "src/server",
+    "src/client"
+  ],
+  "toolchain_file": "rokit.toml",
+  "packages": null,
+  "tools": {
+    "rojo": true,
+    "selene": true,
+    "stylua": true,
+    "luau-lsp": true,
+    "lune": true
+  },
+  "summary": {
+    "pass": 6,
+    "fail": 0,
+    "skip": 0
+  }
+}
+$ echo $?
+0
+=== check-broken
+$ python rbx_check.py broken
+{
+  "ok": false,
+  "project": "broken",
+  "checks": {
+    "build": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\rojo.EXE build default.project.json -o <tmp>\check.rbxl",
+      "output_tail": [
+        "Building project 'fixture-place'",
+        "Built project to check.rbxl"
+      ],
+      "output_lines": 2
+    },
+    "sourcemap": {
+      "status": "pass",
+      "exit": 0,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\rojo.EXE sourcemap default.project.json -o <tmp>\sourcemap.json",
+      "output_tail": [
+        "Created sourcemap at <tmp>\sourcemap.json"
+      ],
+      "output_lines": 1
+    },
+    "lint": {
+      "status": "fail",
+      "exit": 1,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\selene.EXE src/shared src/server src/client",
+      "output_tail": [
+        "warning[unused_variable]: unused is assigned a value, but never used",
+        "  \u250c\u2500 src\shared\Bad.luau:2:7",
+        "  \u2502",
+        "2 \u2502 local unused = 5",
+        "  \u2502       ^^^^^^",
+        "warning[multiple_statements]: only one statement per line is allowed",
+        "  \u250c\u2500 src\shared\Bad.luau:4:16",
+        "  \u2502",
+        "4 \u2502 if n == n then print( n ) end",
+        "  \u2502                ^^^^^^^^^^",
+        "Results:",
+        "0 errors",
+        "2 warnings",
+        "0 parse errors"
+      ],
+      "output_lines": 14
+    },
+    "format": {
+      "status": "fail",
+      "exit": 1,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\stylua.EXE --check src/shared src/server src/client",
+      "output_tail": [
+        "Diff in src/shared\Bad.luau:",
+        "1        |---!strict",
+        "2        |-local unused = 5",
+        "3        |-local n: number = \"oops\"",
+        "4        |-if n == n then print( n ) end",
+        "5        |-return n",
+        "    1    |+--!strict",
+        "    2    |+local unused = 5",
+        "    3    |+local n: number = \"oops\"",
+        "    4    |+if n == n then",
+        "    5    |+\tprint(n)",
+        "    6    |+end",
+        "    7    |+return n"
+      ],
+      "output_lines": 13
+    },
+    "types": {
+      "status": "fail",
+      "exit": 1,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\luau-lsp.EXE analyze --platform=roblox --defs=<cache>\globalTypes.d.luau --ignore=**/_Index/** --sourcemap=<tmp>\sourcemap.json src/shared src/server src/client",
+      "output_tail": [
+        "[INFO] Loading definitions file: @roblox - <cache>\globalTypes.d.luau",
+        "[WARN] client does not allow didChangeWatchedFiles registration - automatic updating on sourcemap changes disabled",
+        "<demo>\broken\src\shared\Bad.luau [game/ReplicatedStorage/Shared/Bad](3,1): TypeError: Expected this to be 'number', but got 'string'",
+        "src/shared/Bad.luau(2,7): LocalUnused: Variable 'unused' is never used; prefix with '_' to silence"
+      ],
+      "output_lines": 4
+    },
+    "lune": {
+      "status": "skip",
+      "reason": "no --lune script given"
+    }
+  },
+  "project_file": "default.project.json",
+  "sources": [
+    "src/shared",
+    "src/server",
+    "src/client"
+  ],
+  "toolchain_file": "rokit.toml",
+  "packages": null,
+  "tools": {
+    "rojo": true,
+    "selene": true,
+    "stylua": true,
+    "luau-lsp": true,
+    "lune": true
+  },
+  "summary": {
+    "pass": 2,
+    "fail": 3,
+    "skip": 1
+  }
+}
+$ echo $?
+1
+=== check-only
+$ python rbx_check.py broken --only types
+{
+  "ok": false,
+  "project": "broken",
+  "checks": {
+    "types": {
+      "status": "fail",
+      "exit": 1,
+      "seconds": <s>,
+      "command": "~\.rokit\bin\luau-lsp.EXE analyze --platform=roblox --defs=<cache>\globalTypes.d.luau --ignore=**/_Index/** --sourcemap=<tmp>\sourcemap.json src/shared src/server src/client",
+      "output_tail": [
+        "[INFO] Loading definitions file: @roblox - <cache>\globalTypes.d.luau",
+        "[WARN] client does not allow didChangeWatchedFiles registration - automatic updating on sourcemap changes disabled",
+        "<demo>\broken\src\shared\Bad.luau [game/ReplicatedStorage/Shared/Bad](3,1): TypeError: Expected this to be 'number', but got 'string'",
+        "src/shared/Bad.luau(2,7): LocalUnused: Variable 'unused' is never used; prefix with '_' to silence"
+      ],
+      "output_lines": 4
+    }
+  },
+  "project_file": "default.project.json",
+  "sources": [
+    "src/shared",
+    "src/server",
+    "src/client"
+  ],
+  "toolchain_file": "rokit.toml",
+  "packages": null,
+  "tools": {
+    "rojo": true,
+    "selene": true,
+    "stylua": true,
+    "luau-lsp": true,
+    "lune": true
+  },
+  "summary": {
+    "pass": 0,
+    "fail": 1,
+    "skip": 0
+  }
+}
+$ echo $?
+1
+=== check-no-defs
+$ python rbx_check.py place --only types --defs missing.d.luau
+{
+  "ok": true,
+  "project": "place",
+  "checks": {
+    "types": {
+      "status": "skip",
+      "reason": "--defs file not found: missing.d.luau"
+    }
+  },
+  "project_file": "default.project.json",
+  "sources": [
+    "src/shared",
+    "src/server",
+    "src/client"
+  ],
+  "toolchain_file": "rokit.toml",
+  "packages": null,
+  "tools": {
+    "rojo": true,
+    "selene": true,
+    "stylua": true,
+    "luau-lsp": true,
+    "lune": true
+  },
+  "summary": {
+    "pass": 0,
+    "fail": 0,
+    "skip": 1
+  }
+}
+$ echo $?
+0
+=== check-not-project
+$ python rbx_check.py empty
+{
+  "ok": false,
+  "project": "empty",
+  "checks": {},
+  "error": "no *.project.json in <demo>\empty; not a Rojo-style project"
+}
+$ echo $?
+2
+=== check-bad-option
+$ python rbx_check.py place --only nonsense
+{"ok": false, "error": "unknown check nonsense (known: build, sourcemap, lint, format, types, lune)"}
+$ echo $?
+2
+=== cloud-help
+$ python rbx_cloud.py run --help
+usage: rbx_cloud.py run [-h] --universe UNIVERSE --place PLACE
+                        [--key-env KEY_ENV] [--dry-run] [--version VERSION]
+                        --script SCRIPT [--timeout TIMEOUT] [--no-wait]
+
+options:
+  -h, --help           show this help message and exit
+  --universe UNIVERSE
+  --place PLACE
+  --key-env KEY_ENV
+  --dry-run
+  --version VERSION
+  --script SCRIPT
+  --timeout TIMEOUT
+  --no-wait
+$ echo $?
+0
+=== cloud-publish-help
+$ python rbx_cloud.py publish --help
+usage: rbx_cloud.py publish [-h] --universe UNIVERSE --place PLACE
+                            [--key-env KEY_ENV] [--dry-run] --file FILE
+                            [--type {Saved,Published}] [--yes]
+
+options:
+  -h, --help            show this help message and exit
+  --universe UNIVERSE
+  --place PLACE
+  --key-env KEY_ENV
+  --dry-run
+  --file FILE
+  --type {Saved,Published}
+  --yes
+$ echo $?
+0
+=== cloud-dry-run
+$ python rbx_cloud.py run --universe 1234567 --place 7654321 --script task.luau --dry-run
+{
+  "ok": true,
+  "dry_run": true,
+  "method": "POST",
+  "url": "https://apis.roblox.com/cloud/v2/universes/1234567/places/7654321/luau-execution-session-tasks",
+  "body": {
+    "script": "<217 characters from task.luau>",
+    "timeout": "300s"
+  }
+}
+$ echo $?
+0
+=== cloud-dry-run-version
+$ python rbx_cloud.py run --universe 1234567 --place 7654321 --version 12 --script task.luau --timeout 120 --dry-run
+{
+  "ok": true,
+  "dry_run": true,
+  "method": "POST",
+  "url": "https://apis.roblox.com/cloud/v2/universes/1234567/places/7654321/versions/12/luau-execution-session-tasks",
+  "body": {
+    "script": "<217 characters from task.luau>",
+    "timeout": "120s"
+  }
+}
+$ echo $?
+0
+=== cloud-publish-dry-run
+$ python rbx_cloud.py publish --universe 1234567 --place 7654321 --file game.rbxl --dry-run
+{
+  "ok": true,
+  "dry_run": true,
+  "method": "POST",
+  "url": "https://apis.roblox.com/universes/v1/1234567/places/7654321/versions?versionType=Saved",
+  "content_type": "application/octet-stream",
+  "bytes": 72
+}
+$ echo $?
+0
+=== cloud-no-key
+$ python rbx_cloud.py run --universe 1234567 --place 7654321 --script task.luau
+{
+  "ok": false,
+  "error": "set ROBLOX_API_KEY to an Open Cloud API key (never pass it on the command line)"
+}
+$ echo $?
+2
+=== cloud-run
+$ python rbx_cloud.py run --universe 1234567 --place 7654321 --version 12 --script task.luau
+{
+  "ok": true,
+  "path": "universes/1234567/places/7654321/versions/12/luau-execution-sessions/s1/tasks/t1",
+  "state": "COMPLETE",
+  "results": [
+    0,
+    12
+  ],
+  "error": null,
+  "logs": [
+    "players online: 0"
+  ]
+}
+$ echo $?
+0
+=== cloud-wrong-key
+$ python rbx_cloud.py run --universe 1234567 --place 7654321 --script task.luau
+{
+  "ok": false,
+  "stage": "create",
+  "http": 401,
+  "response": {
+    "code": "UNAUTHENTICATED",
+    "message": "Invalid API key."
+  }
+}
+$ echo $?
+1
+=== cloud-publish-saved
+$ python rbx_cloud.py publish --universe 1234567 --place 7654321 --file game.rbxl
+{
+  "ok": true,
+  "http": 200,
+  "versionType": "Saved",
+  "versionNumber": 13,
+  "response": null
+}
+$ echo $?
+0
+=== cloud-publish-live-refused
+$ python rbx_cloud.py publish --universe 1234567 --place 7654321 --file game.rbxl --type Published
+{
+  "ok": false,
+  "error": "Published makes this version live for players; rerun with --yes once the user agreed"
+}
+$ echo $?
+2
+=== cloud-ids
+$ python rbx_cloud.py run --universe my-game --place 7654321 --script task.luau
+{
+  "ok": false,
+  "error": "--universe and --place must be numeric ids"
+}
+$ echo $?
+2
