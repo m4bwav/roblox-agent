@@ -35,7 +35,7 @@ Name the page in the reply. If a page cannot be reached, say the API is unverifi
 | `game.Players` style indexing in shared code | `game:GetService("Players")` |
 | legacy chat | `TextChatService` |
 
-Check the deprecated list for anything else that looks old. `selene` (roblox-agent-checks) flags some of these.
+A class page marks itself Deprecated but often does not name the replacement; the mover table comes from `https://create.roblox.com/docs/physics/mover-constraints.md`, so cite that page for movers. Check the deprecated list for anything else that looks old. `selene` (roblox-agent-checks) flags some of these.
 
 ## Step 3: never trust the client
 

@@ -8,6 +8,12 @@ Entry shape: `### T-YYYYMMDD-n · date · harness · env · passed/total`, then 
 
 ## Runs
 
+### T-20261010-2 · 2026-10-10 · evergreen-tester subagents (action and outcome cases, one run each) · Windows 11 dev machine, Claude Code, no Roblox Studio installed · 2/2
+- action-1 pass (skill invoked; ran rbx_check.py on tests/fixtures/place with --fetch-defs and --lune; summary pass 6 fail 0 skip 0 quoted)
+- outcome-1 pass (a skip is not a pass; named --fetch-defs and --defs)
+- One run per case, not the suite's three; trigger and decoy cases not run separately (both action cases invoked the skill first). No baseline without the skill yet, so `worth` stays UNPROVEN.
+- led to: none
+
 ### T-20261010-1 · 2026-10-10 · not yet run · skill · 0/0
 - Suite scaffolded; no run recorded. Write the cases in `evals/evals.json` (at least two trigger prompts, two decoys, one action case with evidence, one outcome case), run the baseline without the skill, then run with it (`evergreen-test`).
 - led to: none
