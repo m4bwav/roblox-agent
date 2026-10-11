@@ -53,7 +53,7 @@ Studio must be open on Windows or macOS with a place loaded. There is no Linux S
 
 ## Step 5: when the connection breaks
 
-In order: is Studio open with a place loaded; is the setting still on (toggle it off and on, the only fix for drops every 5 to 15 minutes); restart the client so it relaunches the server; a place opened before Assistant finished loading may never connect (reopen the place); an outdated Studio lacks `mcp.bat` or `StudioMCP`; on Windows, a Roblox folder path with spaces broke `mcp.bat` in 2026-09; port 13469 taken by another program. If a client update broke the handshake (Claude Code 2.1.281, 2026-09-25), setting `MCP_PROTOCOL_NEGOTIATION=legacy` in that client's environment was the workaround until Roblox's fix on 2026-09-27.
+In order: is Studio open with a place loaded (the start page is not enough: the server then reports 0 tools and an empty `list_roblox_studios`, L-001); is the setting still on (toggle it off and on, the only fix for drops every 5 to 15 minutes); restart the client so it relaunches the server; a place opened before Assistant finished loading may never connect (reopen the place); an outdated Studio lacks `mcp.bat` or `StudioMCP` (on Windows `mcp.bat` appears only once the setting has been enabled; the binary itself is `StudioMCP.exe` in the Studio version folder under `%LOCALAPPDATA%\Roblox\Versions`); on Windows, a Roblox folder path with spaces broke `mcp.bat` in 2026-09; port 13469 taken by another program. If a client update broke the handshake (Claude Code 2.1.281, 2026-09-25), setting `MCP_PROTOCOL_NEGOTIATION=legacy` in that client's environment was the workaround until Roblox's fix on 2026-09-27.
 
 ## Step 6: other servers
 

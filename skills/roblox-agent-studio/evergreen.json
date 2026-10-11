@@ -35,9 +35,9 @@
     }
   ],
   "counts": {
-    "learnings": 0,
-    "changes": 0,
-    "research": 5,
+    "learnings": 1,
+    "changes": 2,
+    "research": 6,
     "tests": 2
   },
   "consolidate_every": 25,

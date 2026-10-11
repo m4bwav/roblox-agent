@@ -22,7 +22,7 @@ Topic: connecting AI agents to Roblox Studio through its built-in MCP server. Ti
 - Is the `execute_luau` capability sandbox intended, and will Roblox offer an opt-out for trusted clients?
 - Can Chrrxs's server and the built-in one run side by side without tool-name clashes?
 - Will Roblox expose Script Analysis (type errors) through MCP? Staff asked for use cases on 2026-05-28.
-- Untested here: no Studio was installed on the development machine on 2026-10-10, so no step of this skill has run against a live Studio yet.
+- Partly tested here (2026-10-10): the server process and handshake were probed on Windows with Studio 0.742 open but no place loaded and the setting off (0 tools, empty studio list, R-20261010-6). A connected session with a place open is still untested.
 
 ## Search plan
 
@@ -55,6 +55,13 @@ Best sources (primary first): create.roblox.com docs (`.md` form), DevForum Anno
 ## Findings log
 
 Newest first. `Track` is subject, tooling, practice, or testing.
+
+### R-20261010-6 · 2026-10-10 · Testing: first live probe of the server on Windows (Studio 0.742)
+- summary: A stdio probe of `StudioMCP.exe` (in the Studio version folder; no `mcp.bat` until the setting is enabled) got `serverInfo` RobloxStudio 1.0.0 with protocol 2025-06-18 and `tools.listChanged`, but 0 tools and an empty `list_roblox_studios` while Studio sat on its start page with the setting off. So the proxy runs without Studio and only gains tools when a Studio attaches; an empty list is a Studio-side state, not a client problem. Response: adopt (Step 5 order, L-001).
+- track: testing
+- sources: local probe on the development machine 2026-10-10
+- magnitude: 0.2
+- applied: C-20261010-2
 
 ### R-20261010-5 · 2026-10-10 · Testing: evidence for a Studio connection and Roblox's own evals
 - summary: The only proof of a connection is a `list_roblox_studios` result; an empty list means Studio closed, no place open, or the setting off. Roblox's plugin ships evals with mocked tool outputs graded by expectations, and Roblox's OpenGameEval (87 tasks run through Open Cloud in Studio sessions; Claude Fable 5 50.34% pass@1) found that runs which inspect the objects a task touches before editing succeed more often. Response: adopt (Step 2.5 evidence, Step 3 read-before-edit, action case in evals).
