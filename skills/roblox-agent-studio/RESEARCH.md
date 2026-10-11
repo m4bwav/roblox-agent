@@ -56,6 +56,13 @@ Best sources (primary first): create.roblox.com docs (`.md` form), DevForum Anno
 
 Newest first. `Track` is subject, tooling, practice, or testing.
 
+### R-20261011-1 · 2026-10-11 · Testing: first live connection and playtest on Windows (Studio 0.742.0.7421053)
+- summary: With a place open and the setting on, `mcp.bat` existed and the proxy exposed 30 tools; `list_roblox_studios` returns `id` and `name`; the playtest loop ran end to end. The reported 0.741 `execute_luau` sandbox did not show on 0.742 in Edit mode (`_G` a table, a new Script parented to ServerScriptService). Response: adjust (the sandbox becomes a reported failure to recognise, not a rule; the id field named).
+- track: testing
+- sources: local probe on the development machine 2026-10-11 (T-20261011-1)
+- magnitude: 0.3
+- applied: C-20261011-1
+
 ### R-20261010-6 · 2026-10-10 · Testing: first live probe of the server on Windows (Studio 0.742)
 - summary: A stdio probe of `StudioMCP.exe` (in the Studio version folder; no `mcp.bat` until the setting is enabled) got `serverInfo` RobloxStudio 1.0.0 with protocol 2025-06-18 and `tools.listChanged`, but 0 tools and an empty `list_roblox_studios` while Studio sat on its start page with the setting off. So the proxy runs without Studio and only gains tools when a Studio attaches; an empty list is a Studio-side state, not a client problem. Response: adopt (Step 5 order, L-001).
 - track: testing

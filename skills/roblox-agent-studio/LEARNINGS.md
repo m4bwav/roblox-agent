@@ -14,6 +14,22 @@ Write an entry the moment a real signal happens: a user correction, the same err
 - Scope: global (Windows; macOS unverified)
 - Status: active · helpful 0 · harmful 0 · last_confirmed 2026-10-10
 
+### L-003 · 2026-10-11 · list_roblox_studios names the field id; the other tools call it studio_id
+- Trigger: first live connection; the skill told the agent to read a `studio_id` from the list, which has none.
+- Hypothesis: the list returns `{"id","name"}` and every other tool's schema asks for `studio_id`.
+- Rule: take `id` from `list_roblox_studios` and pass it as `studio_id`. A Claude Code session started before `claude mcp add` does not load the tools; probe over stdio or restart.
+- Evidence: T-20261011-1
+- Scope: global
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
+### L-002 · 2026-10-11 · In the 2026 Studio layout, Assistant is a top-right button, not a View menu item
+- Trigger: the user looked under View for Assistant and found nothing; it was a button at the top right next to Collaborate.
+- Hypothesis: the 2026 UI (menus File, Edit, View, Plugins, Test, Window, Help) moved Assistant out of the menus.
+- Rule: send users to the top-right Assistant button with a place open, then `...` and the MCP servers setting.
+- Evidence: user screenshot and report 2026-10-11
+- Scope: global (Windows; macOS unverified)
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-11
+
 <!-- Example (delete once you have a real entry):
 ### L-001 · 2026-10-10 · One-line lesson in plain words
 - Trigger: what happened, with dates or counts

@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-1 · 2026-10-11 · Live test: where the setting is, the id field, the sandbox claim softened
+- because: T-20261011-1, R-20261011-1, L-002, L-003
+- files: SKILL.md Step 2 (items 1 and 5), Step 3 (sandbox rule), Output
+- The setting needs an open place and in the 2026 layout lives behind a top-right Assistant button; `list_roblox_studios` returns `id`, passed as `studio_id`; the 0.741 sandbox was not reproduced on 0.742, so the agent tries the direct call first.
+
 ### C-20261010-2 · 2026-10-10 · Step 5: an empty tool list points at Studio's state; where the binary lives
 - because: R-20261010-6, L-001
 - files: SKILL.md Step 5

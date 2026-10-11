@@ -16,7 +16,7 @@ Last updated 2026-10-11.
 
 ## Owed
 
-1. Run `roblox-agent-studio` against a live Roblox Studio with a place open and the MCP setting on (the maintainer's clicks): connection, `list_roblox_studios`, the playtest loop, the `execute_luau` sandbox claim. Studio 0.742 is installed on the development machine since 2026-10-10. Log results in its TESTS.md and LEARNINGS.md.
+1. Live Studio test done 2026-10-11 (T-20261011-1): connection, playtest loop, sandbox not reproduced on 0.742. Still owed: a run through a registered Claude Code entry in a fresh session (tools in the trace, not a stdio probe), `multi_edit` with a read-back, and whether the sandbox applies in Server or Client data models.
 2. Run `rbx_cloud.py run` and `publish --type Saved` against a real test place with a scoped key, and `references/run-jest.luau` with Jest Roblox 3.20. Confirm the `output.results` shape.
 3. Run the eval suites three times per case (the first pass ran fewer; see each TESTS.md).
 4. Re-check whether `/plugin` in Claude Code finds Roblox's "Roblox Studio" plugin (open question in roblox-agent-studio).

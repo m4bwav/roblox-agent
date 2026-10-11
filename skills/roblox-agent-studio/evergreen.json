@@ -18,7 +18,7 @@
   "next_due": "2026-10-24",
   "verify_at_use": false,
   "volatile_claims": [],
-  "contradiction": null,
+  "contradiction": "2026-10-11 T-20261011-1: execute_luau sandbox (reported for 0.741) not reproduced on 0.742; SKILL.md softened, next refresh should confirm whether Roblox lifted or scoped it",
   "events": [],
   "streak": {
     "quiet": 0,
