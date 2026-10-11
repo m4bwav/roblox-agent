@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261011-4 · 2026-10-11 · Trim: troubleshooting list and other servers moved to a reference
+- because: size budget (SKILL.md 2,748 tokens, over the 2,500 green line)
+- files: SKILL.md Step 2 (item 5), Step 5, Step 6; new references/troubleshooting-and-servers.md
+- No claim changed. Step 5 keeps the first three checks and points to the full ordered list; Step 6 keeps the default and the two never-use rules. SKILL.md is 2,465 tokens.
+
 ### C-20261011-3 · 2026-10-11 · Refresh: sandbox described as a rolled-back flag, eval case for its return
 - because: R-20261011-3
 - files: SKILL.md Step 2 (item 5), Step 3 (sandbox rule); RESEARCH.md current understanding, open questions, search plan; evals/evals.json (outcome-2)
