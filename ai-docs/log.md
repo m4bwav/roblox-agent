@@ -40,4 +40,10 @@ Append-only. Newest last.
 - First real Open Cloud run with a scoped key on a private test experience (T-20261011-1 and R-20261011-1 in roblox-agent-cloud): Luau Execution results and logs match the skill; error tasks give FAILED with SCRIPT_ERROR; Saved upload returned versions 4 and 5. Uploads got 409 "Server is busy" while Studio had the place open (L-002). Jest Roblox 3.20.1 (`roblox/jest`, L-003) passed 2/2 once the test place set LoadStringEnabled (L-001). The DevForum "30 creations an hour" lead did not reproduce: 40 in 10 minutes were accepted. Skill and run-jest.luau fixed (C-20261011-1); plugin 0.1.4.
 - Toolchain on the dev machine: Rokit 1.2.0 (self-installed to the user profile), Rojo 7.7.1 and Wally 0.3.2 as global tools.
 
+## 2026-10-13: where to list it for links
+
+- Traffic on 2026-10-13 (14-day window): 57 views, 7 unique visitors, 0 stars, referrers github.com and Bing. Interest is early, not hot yet.
+- Venues, ranked: Claude directory (HANDOFF item 6, owner approves terms); Roblox DevForum Community Resources post (the Roblox audience, owner's account); punkpeye/awesome-mcp-servers has a Gaming section with Roblox entries but lists MCP servers, so it fits only if the plugin ships one; imavafe/awesome-roblox (small, check for an AI section); r/robloxgamedev; Cursor Marketplace and awesome-copilot need a root plugin.json; Codex directory flags the Roblox trademark in the name. Cross-tool lists (hesreallyhim/awesome-claude-code, VoltAgent/awesome-agent-skills, ComposioHQ/awesome-claude-skills) per package-modernization ai-docs/notes/2026-10-07-skill-and-plugin-directories.md.
+- Competitor seen in the search: hope1026/weppy-roblox-mcp (MCP server and Studio plugin, AGPL-3.0, about 30 stars per a third-party directory).
+
 Related: [INDEX.md](INDEX.md)
