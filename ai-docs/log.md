@@ -53,4 +53,6 @@ Append-only. Newest last.
 - `vally lint` (@microsoft/vally 0.18.0 via its `runLint` API, the way awesome-copilot intake calls it) passes 5/5 skills.
 - Rules re-checked 2026-10-13: Cursor's publish page now needs a Cursor sign-in ("publisher application"), name regex `^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$`, manual review of every update. awesome-copilot rejected seven of the owner's plugins on 2026-10-12 ("large batch of closely related submissions", "too product-specific", "style of working"); a rejection is final.
 
+- Submitted to awesome-copilot as #5063 (intake passed after adding the submission marker; see the listings note). Cursor and DevForum stopped at sign-in pages; drafts in the listings note.
+
 Related: [INDEX.md](INDEX.md)
