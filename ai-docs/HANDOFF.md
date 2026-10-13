@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated 2026-10-11 (evening).
+Last updated 2026-10-13.
 
 ## State
 
@@ -22,6 +22,6 @@ Last updated 2026-10-11 (evening).
 3. Run the eval suites three times per case (the first pass ran fewer; see each TESTS.md).
 4. Re-check whether `/plugin` in Claude Code finds Roblox's "Roblox Studio" plugin (open question in roblox-agent-studio).
 5. DevForum lead of about 30 task creates an hour: did not reproduce (40 in 10 minutes accepted, 2026-10-11). Closed.
-6. Items 1 and 2 have passed: consider submitting the plugin to the Anthropic plugin directory (ask the owner before agreeing to terms).
+6. Listings (2026-10-13, [notes/2026-10-13-listings.md](notes/2026-10-13-listings.md)): awesome-copilot #5063 waits for a maintainer; Cursor and the DevForum post need the owner signed in; the Claude directory is held back until his earlier submissions clear review.
 
 Related: [INDEX.md](INDEX.md)
