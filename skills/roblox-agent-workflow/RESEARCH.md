@@ -13,6 +13,7 @@ Topic: writing reviewable Roblox Luau with agents. Tier `moderate`. Last refresh
 - Creator Store inserts are sandboxed since 2026-05-13 (LoadAsset, loadstring, CapabilityControl, get/setfenv blocked). Free-model backdoors (`require(id)`, HTTP loaders) remain the top Studio risk; obfuscated paid bridge plugins draw suspicion.
 - Generative AI policy (`/docs/generative-AI`): creators own third-party AI output; text through TextChatService; declare player-facing AI in the maturity questionnaire; Restricted (18+) for extended or cross-session AI chat; visible AI notices. It targets AI that players meet, not AI used to build. In-game: TextGenerator, GenerationService (Cube 3D), AudioTextToSpeech.
 - Knowledge skill sets (tooling track): TabooHarmony/roblox-brain (29 skills, MIT, v2.2 2026-10-02, tests; one scanner warns), gamedev-skills/awesome-gamedev-agent-skills (roblox-luau 3,767 and roblox-datastores 3,480 installs, Apache-2.0), nonlooped/roblox-suite (16 skills, the only one with an eval harness). Pointed at, not copied.
+- 3D models (references/3d-models.md, R-20261017-1): 20,000 triangles per mesh (the Importer simplifies above it), watertight, one material per MeshPart, PBR on `SurfaceAppearance` (colour, OpenGL normal, roughness, metalness, emissive mask; not scriptable at run time), textures up to 4096 px but a 1024 px budget per map, 1 stud = 28 cm, at most 4 bone influences; rigid and layered accessories 4,000 triangles; R15 body budgets total 10,742; `CollisionFidelity` Tunable since 2026-09-17; identical MeshContent plus identical appearance instances into one draw call; Open Cloud `assetType` Model takes FBX, glTF, GLB up to 20 MB as packages. Making and fixing meshes is the polywright plugin's job.
 - Library authors have begun shipping AGENTS.md snippets; a DevForum user asked Roblox for AGENTS.md support because rules kept in a script get forgotten.
 
 ## Open questions
@@ -26,6 +27,7 @@ Topic: writing reviewable Roblox Luau with agents. Tier `moderate`. Last refresh
 Subject:
 
 - `https://create.roblox.com/docs/reference/engine/deprecated.md` (diff against the table in Step 2); `https://create.roblox.com/docs/generative-AI.md`
+- 3D models: re-read the pages listed in R-20261017-1 (triangle, texture and accessory limits; importer settings; Open Cloud asset types); DevForum Announcements `q=mesh OR importer OR SurfaceAppearance OR collision`
 - DevForum Announcements since `last_checked` for deprecations, Server Authority, data store and security changes; `gh api repos/luau-lang/luau/releases` for language changes
 
 Tooling:
@@ -46,6 +48,13 @@ Testing:
 Best sources: Roblox docs (`.md`), DevForum Announcements, the three skill sets' repositories. Noisy: AI-written tutorial posts, vendor "best practices" blogs.
 
 ## Findings log
+
+### R-20261017-1 · 2026-10-17 · Subject: 3D models for Roblox (limits, PBR, scale, collision, avatar items, uploads)
+- summary: Read the current modelling, texture, importer, units, collision, performance, avatar, UGC validation and Open Cloud asset pages and dated DevForum announcements; written up from the developer's side in references/3d-models.md, with mesh making sent to polywright. The texture page both allows 4096 px uploads and caps UV texture maps at 1024 px; the reference states both. `parts/meshes` says four PBR maps while `surface-appearance` lists five (emissive mask added). Response: adopt (new reference, Step 5 pointer).
+- track: subject
+- sources: https://create.roblox.com/docs/art/modeling/specifications.md, https://create.roblox.com/docs/art/modeling/texture-specifications.md, https://create.roblox.com/docs/art/modeling/surface-appearance.md, https://create.roblox.com/docs/art/modeling/export-requirements.md, https://create.roblox.com/docs/art/blender.md, https://create.roblox.com/docs/parts/meshes.md, https://create.roblox.com/docs/studio/importer.md, https://create.roblox.com/docs/art/modeling/reimport.md, https://create.roblox.com/docs/physics/units.md, https://create.roblox.com/docs/parts/solid-modeling.md, https://create.roblox.com/docs/performance-optimization/improve.md, https://create.roblox.com/docs/avatar/character-bodies/specifications.md, https://create.roblox.com/docs/avatar/rigid-accessories/specifications.md, https://create.roblox.com/docs/avatar/layered-accessories/specifications.md, https://create.roblox.com/docs/avatar-setup/auto-setup-requirements.md, https://create.roblox.com/docs/marketplace/validation-system.md, https://create.roblox.com/docs/parts/model-generation.md, https://create.roblox.com/docs/cloud/guides/usage-assets.md, https://devforum.roblox.com/t/2057539 (3D Importer full release, 2022-11-17), https://devforum.roblox.com/t/4515374 (solid modelling on meshes beta, 2026-03-12), https://devforum.roblox.com/t/4709282 (UGC validation visualiser beta, 2026-06-29), https://devforum.roblox.com/t/4703282 (64 terrain materials early access, 2026-06-25), https://devforum.roblox.com/t/4859863 (Auto-Reimport beta, 2026-09-08), https://devforum.roblox.com/t/4878198 (Tunable collision, 2026-09-17)
+- magnitude: minor (new reference)
+- applied: C-20261017-2
 
 ### R-20261010-4 · 2026-10-10 · Testing: what a good review looks like
 - summary: The evidence for this skill is a review that cites the docs page used and flags client trust and deprecated calls; selene catches part of the deprecated list mechanically. Eval cases use a seeded insecure RemoteEvent handler and a `wait()` call.
