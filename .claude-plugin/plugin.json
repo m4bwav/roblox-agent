@@ -1,7 +1,7 @@
 {
   "name": "roblox-agent",
   "icon": "./.claude-plugin/icon.png",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Evergreen skills for building Roblox games with AI coding agents: connecting to Studio's built-in MCP server the safe way, keeping code on disk with Script Sync or Rojo, checking Luau without Studio (build, lint, format, types, Lune tests), Open Cloud Luau Execution and place uploads, and agent rules for secure, current Roblox code. Each skill re-researches its subject on a schedule and carries the evals that prove it triggers and acts.",
   "author": {
     "name": "Mark Rogers"

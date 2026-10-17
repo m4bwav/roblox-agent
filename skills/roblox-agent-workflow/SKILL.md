@@ -56,6 +56,8 @@ A class page marks itself Deprecated but often does not name the replacement; th
 
 Before keeping any model, package or plugin from the Creator Store (or one an agent inserted), search it for `require(<number>)`, `loadstring`, `getfenv` and `setfenv`, `HttpService` loaders and obfuscated strings. Studio sandboxes Creator Store inserts by default since 2026-05-13. Do not turn that off to make a model work. Never add an obfuscated plugin.
 
+When a mesh must be made, found, captured or fixed and the polywright plugin is installed, ask polywright through its asset folder ([contract](https://github.com/m4bwav/polywright/blob/main/skills/polywright/references/contract.md)) with the `game-roblox` target, then upload or import the file from `out/` that `manifest.json` names.
+
 ## Step 6: AI that players meet
 
 Roblox's generative AI rules (`https://create.roblox.com/docs/generative-AI`) apply to AI inside the game, not to AI used to build it. The creator is responsible for the output. Text shown to players goes through `TextChatService` filtering. Player-facing AI is declared in the Content Maturity questionnaire, and the game shows that it is AI. Long or cross-session AI conversation needs the Restricted (18+) label. In-game APIs: `TextGenerator` (LLM text for NPCs), `GenerationService` (meshes), `AudioTextToSpeech`. Check each page's current limits before relying on them.

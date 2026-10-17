@@ -55,4 +55,9 @@ Append-only. Newest last.
 
 - Submitted to awesome-copilot as #5063 (intake passed after adding the submission marker; see the listings note). Cursor and DevForum stopped at sign-in pages; drafts in the listings note.
 
+## 2026-10-17: polywright pointer
+
+- roblox-agent-workflow Step 5 now sends mesh work to the polywright plugin, when installed, through its asset-folder contract (`game-roblox` target, file from `out/` named in `manifest.json`). C-20261017-1; plugin manifests bumped to 0.1.5, not tagged.
+- The structure check had failed on main since 2026-10-13: `tests/check_skills.py` read the Cursor name regex in the 2026-10-13 entry as a markdown link. It now skips inline code spans when it looks for links.
+
 Related: [INDEX.md](INDEX.md)
