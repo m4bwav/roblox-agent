@@ -60,4 +60,8 @@ Append-only. Newest last.
 - roblox-agent-workflow Step 5 now sends mesh work to the polywright plugin, when installed, through its asset-folder contract (`game-roblox` target, file from `out/` named in `manifest.json`). C-20261017-1; plugin manifests bumped to 0.1.5, not tagged.
 - The structure check had failed on main since 2026-10-13: `tests/check_skills.py` read the Cursor name regex in the 2026-10-13 entry as a markdown link. It now skips inline code spans when it looks for links.
 
+## 2026-10-17: 3D models reference
+
+- New `skills/roblox-agent-workflow/references/3d-models.md`: Roblox 3D models from the developer's side (styles, 20k triangles per mesh, one material per MeshPart, PBR maps, 1 stud = 28 cm, importer pivot and axis settings, collision versus render fidelity, draw-call instancing, R15 and accessory budgets, UGC validation, Studio versus Blender, Open Cloud model uploads), pointing to polywright for making meshes. Step 5 links it. R-20261017-1, C-20261017-2; manifests 0.1.6, not tagged.
+
 Related: [INDEX.md](INDEX.md)

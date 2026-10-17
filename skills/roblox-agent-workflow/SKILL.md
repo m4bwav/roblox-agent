@@ -56,7 +56,7 @@ A class page marks itself Deprecated but often does not name the replacement; th
 
 Before keeping any model, package or plugin from the Creator Store (or one an agent inserted), search it for `require(<number>)`, `loadstring`, `getfenv` and `setfenv`, `HttpService` loaders and obfuscated strings. Studio sandboxes Creator Store inserts by default since 2026-05-13. Do not turn that off to make a model work. Never add an obfuscated plugin.
 
-When a mesh must be made, found, captured or fixed and the polywright plugin is installed, ask polywright through its asset folder ([contract](https://github.com/m4bwav/polywright/blob/main/skills/polywright/references/contract.md)) with the `game-roblox` target, then upload or import the file from `out/` that `manifest.json` names.
+When a mesh must be made, found, captured or fixed and the polywright plugin is installed, ask polywright through its asset folder ([contract](https://github.com/m4bwav/polywright/blob/main/skills/polywright/references/contract.md)) with the `game-roblox` target, then upload or import the file from `out/` that `manifest.json` names. Limits, styles, scale, collision, performance, avatar items and uploads from the developer's side: [references/3d-models.md](references/3d-models.md).
 
 ## Step 6: AI that players meet
 

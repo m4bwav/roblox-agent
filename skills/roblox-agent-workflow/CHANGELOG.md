@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261017-2 · 2026-10-17 · Reference: 3D models from the developer's side
+- because: user request: each plugin carries 3D modelling knowledge for its topic and points to polywright; R-20261017-1
+- files: references/3d-models.md (new), SKILL.md Step 5, RESEARCH.md (Current understanding, Search plan, Findings log)
+- New reference on styles, mesh limits, PBR maps, scale and pivots, collision versus rendering, performance, R15 rigs, accessories and UGC validation, Studio versus Blender, and Open Cloud model uploads; it links polywright's contract and its Roblox finishing page. Step 5 gains one pointer sentence. No trigger or decision change, so the evals were not re-run.
+
 ### C-20261017-1 · 2026-10-17 · Pointer to polywright for meshes
 - because: user request (polywright HANDOFF owed item 6: siblings call polywright through the folder contract)
 - files: SKILL.md Step 5
