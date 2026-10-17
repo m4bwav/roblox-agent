@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261017-1 · 2026-10-17 · Pointer to polywright for meshes
+- because: user request (polywright HANDOFF owed item 6: siblings call polywright through the folder contract)
+- files: SKILL.md Step 5
+- One sentence: when a mesh is needed and polywright is installed, ask it through its asset-folder contract with the `game-roblox` target and take the file from `out/` named in `manifest.json`.
+
 ### C-20261011-4 · 2026-10-11 · Learning L-001 rewritten: the terrain surface sits half a voxel high
 - because: L-001
 - files: LEARNINGS.md

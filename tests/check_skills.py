@@ -116,7 +116,8 @@ def check_links_and_text():
             continue
         text = open(f, encoding="utf-8", errors="replace").read()
         if f.endswith(".md"):
-            for target in LINK.findall(text):
+            # inline code spans are not links (a regex in backticks once tripped this)
+            for target in LINK.findall(re.sub(r"`[^`\n]*`", "", text)):
                 if re.match(r"^(https?:|mailto:|#)", target):
                     continue
                 path = target.split("#", 1)[0]
