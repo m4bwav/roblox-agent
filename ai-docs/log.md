@@ -64,4 +64,8 @@ Append-only. Newest last.
 
 - New `skills/roblox-agent-workflow/references/3d-models.md`: Roblox 3D models from the developer's side (styles, 20k triangles per mesh, one material per MeshPart, PBR maps, 1 stud = 28 cm, importer pivot and axis settings, collision versus render fidelity, draw-call instancing, R15 and accessory budgets, UGC validation, Studio versus Blender, Open Cloud model uploads), pointing to polywright for making meshes. Step 5 links it. R-20261017-1, C-20261017-2; manifests 0.1.6, not tagged.
 
+## 2026-10-18: release 0.1.6
+
+- Tag v0.1.6 at main ea0c5fc (plugin.json already said 0.1.6); release.yml passed and published https://github.com/m4bwav/roblox-agent/releases/tag/v0.1.6. It ships the 0.1.4 live Open Cloud findings, the listing files, the learnings from 2026-10-11 and the 2026-10-17 workflow changes for 3D models.
+
 Related: [INDEX.md](INDEX.md)
