@@ -1,6 +1,6 @@
 # Handoff
 
-Last updated 2026-10-13.
+Last updated 2026-10-18.
 
 ## State
 
@@ -11,7 +11,7 @@ Last updated 2026-10-13.
 - Eval runs: action and outcome cases for all five skills passed once each (T-20261010-2 in each TESTS.md).
 
 - v0.1.2 (2026-10-11): `--defs` missing file is a usage error, `rbx_cloud.py` help text, narrower project description. Wiki updated for it the same day (wiki note, "Update for 0.1.2").
-- v0.1.3 (2026-10-11): roblox-agent-studio SKILL.md trimmed back to green. 0.1.4 (pending review): live Open Cloud findings in roblox-agent-cloud.
+- v0.1.3 (2026-10-11): roblox-agent-studio SKILL.md trimmed back to green. 0.1.4 to 0.1.6: live Open Cloud findings, listing files, learnings and 3D-model guidance; released as v0.1.6 on 2026-10-18.
 - Cost rule: the maintainer pays Roblox nothing. Studio, Open Cloud keys and Luau Execution are free; every owed run must stay on that path.
 - The next session's prompt is kept in the owner's private notes, outside the repository.
 
