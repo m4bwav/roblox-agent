@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261023-1 · 2026-10-23 · Link the playtest protocol
+- because: owner request (book-learnings track 9); roblox-agent-workflow C-20261023-1
+- files: SKILL.md
+- Step 4 item 6 links the break-it pass and human checklist in roblox-agent-workflow's game-design reference; the Maintenance line shortened to keep SKILL.md at 2,499 tokens (green). No trigger or decision change, so the evals were not re-run.
+
 ### C-20261011-6 · 2026-10-11 · Learning: blank captures and missing SurfaceGuis
 - because: L-008
 - files: LEARNINGS.md

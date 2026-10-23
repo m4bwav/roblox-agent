@@ -35,18 +35,18 @@
     }
   ],
   "counts": {
-    "learnings": 0,
-    "changes": 0,
-    "research": 5,
-    "tests": 3
+    "learnings": 1,
+    "changes": 1,
+    "research": 6,
+    "tests": 4
   },
   "consolidate_every": 25,
   "tests": {
-    "last_run": "2026-10-10T23:55",
-    "harness": "evergreen-tester subagents, one run per case",
+    "last_run": "2026-10-23T12:00",
+    "harness": "headless claude -p, --setting-sources project,local, --plugin-dir worktree",
     "env": "dev-machine",
-    "cases": 4,
-    "passed": 4,
+    "cases": 11,
+    "passed": 11,
     "failed": 0,
     "failing": [],
     "last_failure": null,

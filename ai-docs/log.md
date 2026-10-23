@@ -68,4 +68,12 @@ Append-only. Newest last.
 
 - Tag v0.1.6 at main ea0c5fc (plugin.json already said 0.1.6); release.yml passed and published https://github.com/m4bwav/roblox-agent/releases/tag/v0.1.6. It ships the 0.1.4 live Open Cloud findings, the listing files, the learnings from 2026-10-11 and the 2026-10-17 workflow changes for 3D models.
 
+## 2026-10-23: game design before code (book-learnings track 9)
+
+- roblox-agent-workflow gains Step 1, "design before code", and `references/game-design.md` (after Rogers, *Level Up!*, in our own words): a one-pager for a new experience, one metrics ModuleScript built from the place's own `StarterPlayer` and `Workspace` values, a playground with owner-only debug commands, enemy and encounter cards, multiplayer map rules, fairness and checkpoints, and a playtest protocol (the agent's break-it pass and a human checklist). Old Steps 1 to 8 are now 2 to 9. roblox-agent-checks (ladder rung 5) and roblox-agent-studio (Step 4 item 6) link the playtest section.
+- Defaults read from the API reference 2026-10-23 (R-20261023-1): walk 16, jump height 7.2, jump power 50, `CharacterUseJumpPower` true, gravity 196.2, respawn 5 s, spawn ForceField 10 s. No character size is published; the reference measures it.
+- Evals T-20261023-1: five new cases 3/3 each; baselines for the action and outcome cases 0/1; old triggers and decoys re-run after the description change (trigger-1 2/3, a prompt with no code). Branch evals need `--setting-sources project,local` (L-003).
+- Rulings B1 to B7: [decisions/2026-10-23-books-track9-game-design.md](decisions/2026-10-23-books-track9-game-design.md). Manifests 0.1.7, not tagged. Installed skills 214 KB (yellow, was 203).
+
 Related: [INDEX.md](INDEX.md)
+## [2026-10-23] index | rebuilt (3 entries)

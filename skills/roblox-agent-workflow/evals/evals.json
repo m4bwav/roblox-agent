@@ -74,6 +74,65 @@
         "WebFetch"
       ],
       "max_turns": 12
+    },
+    {
+      "id": "trigger-3",
+      "kind": "trigger",
+      "prompt": "I want to make an obby in Roblox. Where do I start?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-workflow skill is invoked"
+      ]
+    },
+    {
+      "id": "trigger-4",
+      "kind": "trigger",
+      "prompt": "What should my playtesters look for in my Roblox tower defense game?",
+      "runs": 3,
+      "expectations": [
+        "the roblox-agent-workflow skill is invoked"
+      ]
+    },
+    {
+      "id": "decoy-3",
+      "kind": "trigger",
+      "prompt": "Design a card game for my family's game night.",
+      "runs": 3,
+      "decoy": true,
+      "expectations": [
+        "the roblox-agent-workflow skill is not invoked (not Roblox)"
+      ]
+    },
+    {
+      "id": "action-2",
+      "kind": "action",
+      "prompt": "Start a new Roblox obby in this empty folder (Rojo layout, src/ for code). Plan it, then write the code for the first stage. Don't ask me anything, make the calls yourself.",
+      "expectations": [
+        "docs/ONE-PAGER.md exists and names the core loop",
+        "a single metrics module (a .luau or .lua file whose name contains Metrics) holds WalkSpeed or JumpHeight, and another code file requires it"
+      ],
+      "evidence": {
+        "type": "file",
+        "path": "docs/ONE-PAGER.md",
+        "content_match": "(?i)core loop",
+        "also": "a file whose name matches (?i)metrics.*\\.luau?$ contains WalkSpeed or JumpHeight, and another .luau file requires it"
+      },
+      "baseline": "not yet run",
+      "runs": 3,
+      "max_turns": 40
+    },
+    {
+      "id": "outcome-2",
+      "kind": "outcome",
+      "prompt": "My Roblox obby is code-complete and the checks pass. What should the playtest cover before I publish?",
+      "expectations": [
+        "an agent break-it pass: out of bounds or stages out of order",
+        "questions for human testers about confusion or unfairness",
+        "regex on the answer, both must match: (?i)(out of bounds|out-of-bounds|backwards|out of order) and (?i)(unfair|confus)"
+      ],
+      "baseline": "not yet run",
+      "runs": 3,
+      "max_turns": 12
     }
   ]
 }

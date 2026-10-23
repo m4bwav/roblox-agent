@@ -51,6 +51,7 @@ Studio must be open on Windows or macOS with a place loaded. There is no Linux S
 3. `get_console_output` for errors and your own prints. `screen_capture` when the change is visual. `character_navigation` or `user_keyboard_input` to drive the player.
 4. `start_stop_play` to stop. Report the returned values and log lines as the evidence.
 5. The `subagent` tool (`playtest` type, beta) can run a longer test. It has reported false passes, so check its claims against console output.
+6. Gameplay: the break-it pass and the human checklist are in [game-design.md](../roblox-agent-workflow/references/game-design.md) section 7.
 
 ## Step 5: when the connection breaks
 
@@ -70,4 +71,4 @@ If the user corrects you, the same error happens twice, a workaround is found, o
 
 ## Maintenance
 
-This skill is evergreen (tier `fast`; the schedule is in `evergreen.json`). Files: `evergreen.json` (state), [RESEARCH.md](RESEARCH.md) (findings and search plan), [CHANGELOG.md](CHANGELOG.md) (every change, with reasons), [LEARNINGS.md](LEARNINGS.md) (lessons), [TESTS.md](TESTS.md) and `evals/evals.json` (the cases that prove it and the runs). Protocol: MAINTENANCE.md (pointer to the installed evergreen plugin). Refresh with `evergreen-refresh`; test with `evergreen-test`; fix a failure with `evergreen-tune`. Sibling skills in this suite: roblox-agent-checks, roblox-agent-cloud, roblox-agent-project, roblox-agent-studio, roblox-agent-workflow.
+This skill is evergreen (tier `fast`, schedule in `evergreen.json`). Files: `evergreen.json` (state), [RESEARCH.md](RESEARCH.md) (findings and search plan), [CHANGELOG.md](CHANGELOG.md) (every change, with reasons), [LEARNINGS.md](LEARNINGS.md) (lessons), [TESTS.md](TESTS.md) and `evals/evals.json` (the cases that prove it and the runs). Protocol: MAINTENANCE.md (pointer to the installed evergreen plugin). Refresh with `evergreen-refresh`; test with `evergreen-test`; fix a failure with `evergreen-tune`. Sibling skills in this suite: roblox-agent-checks, roblox-agent-cloud, roblox-agent-project, roblox-agent-studio, roblox-agent-workflow.

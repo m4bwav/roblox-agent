@@ -15,6 +15,7 @@ Topic: writing reviewable Roblox Luau with agents. Tier `moderate`. Last refresh
 - Knowledge skill sets (tooling track): TabooHarmony/roblox-brain (29 skills, MIT, v2.2 2026-10-02, tests; one scanner warns), gamedev-skills/awesome-gamedev-agent-skills (roblox-luau 3,767 and roblox-datastores 3,480 installs, Apache-2.0), nonlooped/roblox-suite (16 skills, the only one with an eval harness). Pointed at, not copied.
 - 3D models (references/3d-models.md, R-20261017-1): 20,000 triangles per mesh (the Importer simplifies above it), watertight, one material per MeshPart, PBR on `SurfaceAppearance` (colour, OpenGL normal, roughness, metalness, emissive mask; not scriptable at run time), textures up to 4096 px but a 1024 px budget per map, 1 stud = 28 cm, at most 4 bone influences; rigid and layered accessories 4,000 triangles; R15 body budgets total 10,742; `CollisionFidelity` Tunable since 2026-09-17; identical MeshContent plus identical appearance instances into one draw call; Open Cloud `assetType` Model takes FBX, glTF, GLB up to 20 MB as packages. Making and fixing meshes is the polywright plugin's job.
 - Library authors have begun shipping AGENTS.md snippets; a DevForum user asked Roblox for AGENTS.md support because rules kept in a script get forgotten.
+- Game design (references/game-design.md, R-20261023-1): plan before code, after Rogers, *Level Up!*. Engine defaults read 2026-10-23: walk 16, jump height 7.2 or power 50 (UseJumpPower true per the reference), gravity 196.2, respawn 5 s, spawn ForceField 10 s; the place's own values win. Roblox's design pages (design-for-roblox, core-loops, onboarding, prototyping) are the depth to fetch.
 
 ## Open questions
 
@@ -48,6 +49,13 @@ Testing:
 Best sources: Roblox docs (`.md`), DevForum Announcements, the three skill sets' repositories. Noisy: AI-written tutorial posts, vendor "best practices" blogs.
 
 ## Findings log
+
+### R-20261023-1 · 2026-10-23 · Subject: character defaults and Roblox's own game-design pages
+- summary: Read the StarterPlayer, Humanoid, Workspace, Players and SpawnLocation class pages for the values a metrics module starts from: CharacterWalkSpeed 16, CharacterJumpHeight 7.2 studs, CharacterJumpPower 50, CharacterUseJumpPower true (as the reference states it; a place can differ), CharacterMaxSlopeAngle 89, Workspace.Gravity 196.2 studs/s², Players.RespawnTime 5 s, SpawnLocation.Duration 10 s. The units page gives 1 stud = 28 cm and no character size, so the reference measures the character with GetExtentsSize. The docs index lists a "Design your experience" section (design-for-roblox, core-loops, onboarding, prototyping); its onboarding page says new players decide within minutes. Response: adopt (references/game-design.md, Step 1).
+- track: subject
+- sources: https://create.roblox.com/docs/reference/engine/classes/StarterPlayer.md, https://create.roblox.com/docs/reference/engine/classes/Humanoid.md, https://create.roblox.com/docs/reference/engine/classes/Workspace.md, https://create.roblox.com/docs/reference/engine/classes/Players.md, https://create.roblox.com/docs/reference/engine/classes/SpawnLocation.md, https://create.roblox.com/docs/physics/units.md, https://create.roblox.com/docs/production/game-design/design-for-roblox.md, https://create.roblox.com/docs/production/game-design/core-loops.md, https://create.roblox.com/docs/production/game-design/onboarding.md
+- magnitude: minor (new reference and step)
+- applied: C-20261023-1
 
 ### R-20261017-1 · 2026-10-17 · Subject: 3D models for Roblox (limits, PBR, scale, collision, avatar items, uploads)
 - summary: Read the current modelling, texture, importer, units, collision, performance, avatar, UGC validation and Open Cloud asset pages and dated DevForum announcements; written up from the developer's side in references/3d-models.md, with mesh making sent to polywright. The texture page both allows 4096 px uploads and caps UV texture maps at 1024 px; the reference states both. `parts/meshes` says four PBR maps while `surface-appearance` lists five (emissive mask added). Response: adopt (new reference, Step 5 pointer).
