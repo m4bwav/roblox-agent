@@ -6,6 +6,14 @@ Write an entry the moment a real signal happens: a user correction, the same err
 
 ## Active
 
+### L-003 · 2026-10-23 · Headless evals of a branch load the user's own skill copies too, unless setting sources leave out "user"
+- Trigger: the suite's skills are also linked into the user's skills folder from the main clone, so a headless `claude -p --plugin-dir <worktree>` run would offer both the branch copy and the main copy of each skill.
+- Hypothesis: user-level skills load from the user setting source, independent of `--plugin-dir`.
+- Rule: for branch evals run `claude -p ... --setting-sources project,local --plugin-dir <worktree>` from an empty folder, and check the `init` event lists only `roblox-agent:` skills; the baseline is the same command without `--plugin-dir`. On Windows, start `claude.exe` directly from a script (the npm `claude.cmd` shim is not found by Python's subprocess).
+- Evidence: T-20261023-1 (init event: five roblox-agent skills, plugin source `roblox-agent@inline`)
+- Scope: repo:roblox-agent
+- Status: active · helpful 1 · harmful 0 · last_confirmed 2026-10-23
+
 ### L-002 · 2026-10-11 · Rebuilding terrain several times in one session can leave flat sky-coloured patches up close
 - Trigger: after five Clear-and-WriteVoxels rebuilds in one Studio session, the user saw flat blue patches (sky colour) near the camera that vanished when zoomed out. Raycasts there hit solid Grass and no part covered the spot.
 - Hypothesis: Studio kept stale near-LOD terrain meshes for some chunks after the rapid rewrites; the voxel data was correct.

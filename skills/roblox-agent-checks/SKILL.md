@@ -45,7 +45,7 @@ Climb only as far as the change needs, and say which rung was reached:
 2. Pure-Luau unit tests with Lune: keep game logic in modules that take plain values, so Lune can `require` them (`lune run tests/x.spec.luau`).
 3. Place-file assertions: a Lune script that opens the built place with `@lune/roblox` (`roblox.deserializePlace(fs.readFile("build.rbxl"))`) and asserts the tree, for example that a ModuleScript exists at the right path. Studio is not needed.
 4. Engine tests on Roblox servers through Open Cloud Luau Execution with Jest Roblox (roblox-agent-cloud). They need an API key and a test place.
-5. Playtest in Studio over MCP (roblox-agent-studio), and a human playtest for feel. A human playtest is the last word on gameplay, and the reply says when one is still owed.
+5. Playtest in Studio over MCP (roblox-agent-studio), and a human playtest for feel. A human playtest is the last word on gameplay, and the reply says when one is still owed and hands over the checklist in roblox-agent-workflow's [game-design reference](../roblox-agent-workflow/references/game-design.md) (section 7).
 
 ## Step 4: CI for the user's repository
 
