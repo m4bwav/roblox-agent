@@ -69,6 +69,8 @@ Before keeping any model, package or plugin from the Creator Store (or one an ag
 
 When a mesh must be made, found, captured or fixed and the polywright plugin is installed, ask polywright through its asset folder ([contract](https://github.com/m4bwav/polywright/blob/main/skills/polywright/references/contract.md)) with the `game-roblox` target, then upload or import the file from `out/` that `manifest.json` names. Limits, styles, scale, collision, performance, avatar items and uploads from the developer's side: [references/3d-models.md](references/3d-models.md).
 
+Pixel-art images in a GUI (`ImageLabel`, `ImageButton`): set `ResampleMode` to `Enum.ResamplerMode.Pixelated`, or Roblox smooths the scaled pixels into blur, and size the element at a whole-number multiple of the image's pixels (R-20261025-1).
+
 ## Step 7: AI that players meet
 
 Roblox's generative AI rules (`https://create.roblox.com/docs/generative-AI`) apply to AI inside the game, not to AI used to build it. The creator is responsible for the output. Text shown to players goes through `TextChatService` filtering. Player-facing AI is declared in the Content Maturity questionnaire, and the game shows that it is AI. Long or cross-session AI conversation needs the Restricted (18+) label. In-game APIs: `TextGenerator` (LLM text for NPCs), `GenerationService` (meshes), `AudioTextToSpeech`. Check each page's current limits before relying on them.

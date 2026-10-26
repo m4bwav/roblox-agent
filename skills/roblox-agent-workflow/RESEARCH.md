@@ -50,6 +50,13 @@ Best sources: Roblox docs (`.md`), DevForum Announcements, the three skill sets'
 
 ## Findings log
 
+### R-20261025-1 · 2026-10-25 · Subject: pixel-art images in Roblox GUIs
+- summary: The pixel-art books read for the book-learnings build (Azzi, *Pixel Logic*, p. 21; Dawe and Humphries, *Make Your Own Pixel Art*, ch. 4) say pixel art scales by whole numbers with nearest-neighbour sampling only. On Roblox that is `ImageLabel.ResampleMode` and `ImageButton.ResampleMode`, type `Enum.ResamplerMode`, items `Default` (0) and `Pixelated` (1), read on create.roblox.com 2026-10-25. The pages give no default or description, so "Default smooths" follows from the name and the books, not from Roblox's text. Not run in Studio.
+- track: subject
+- sources: https://create.roblox.com/docs/reference/engine/enums/ResamplerMode; https://create.roblox.com/docs/reference/engine/classes/ImageLabel; https://create.roblox.com/docs/reference/engine/classes/ImageButton
+- magnitude: 0.1
+- applied: C-20261025-1
+
 ### R-20261023-1 · 2026-10-23 · Subject: character defaults and Roblox's own game-design pages
 - summary: Read the StarterPlayer, Humanoid, Workspace, Players and SpawnLocation class pages for the values a metrics module starts from: CharacterWalkSpeed 16, CharacterJumpHeight 7.2 studs, CharacterJumpPower 50, CharacterUseJumpPower true (as the reference states it; a place can differ), CharacterMaxSlopeAngle 89, Workspace.Gravity 196.2 studs/s², Players.RespawnTime 5 s, SpawnLocation.Duration 10 s. The units page gives 1 stud = 28 cm and no character size, so the reference measures the character with GetExtentsSize. The docs index lists a "Design your experience" section (design-for-roblox, core-loops, onboarding, prototyping); its onboarding page says new players decide within minutes. Response: adopt (references/game-design.md, Step 1).
 - track: subject

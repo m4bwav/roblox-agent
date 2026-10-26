@@ -77,3 +77,4 @@ Append-only. Newest last.
 
 Related: [INDEX.md](INDEX.md)
 ## [2026-10-23] index | rebuilt (3 entries)
+## [2026-10-25] update | roblox-agent-workflow C-20261025-1 (book-learnings round 2 track 19): Step 6 pixel-art GUI images use ResampleMode Pixelated and whole-number sizes; ResamplerMode items read on create.roblox.com (R-20261025-1), not run in Studio; budget unchanged yellow (223 KB installed)
