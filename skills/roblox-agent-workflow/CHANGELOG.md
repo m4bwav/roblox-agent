@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261025-1 · 2026-10-25 · Step 6: pixel-art images take ResampleMode Pixelated
+- because: R-20261025-1 (book-learnings round 2 track 19)
+- files: SKILL.md (Step 6, one paragraph), RESEARCH.md (R-20261025-1)
+- GUI images of pixel art set `ResampleMode = Pixelated` and size at whole-number multiples.
+
 ### C-20261023-1 · 2026-10-23 · Step 1: design before code, with a game-design reference
 - because: owner request (book-learnings track 9, after Rogers, *Level Up!*); R-20261023-1; T-20261023-1
 - files: SKILL.md (description, new Step 1, old Steps 1-8 renumbered 2-9, Output), references/game-design.md (new), evals/evals.json (trigger-3, trigger-4, decoy-3, action-2, outcome-2), RESEARCH.md
