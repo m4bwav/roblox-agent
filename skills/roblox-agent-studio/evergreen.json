@@ -13,18 +13,13 @@
   "source": null,
   "topic": "Connecting AI agents to Roblox Studio through its built-in MCP server: Roblox official agent plugin, manual stdio entries, tool list, playtest loop, sandbox and connection pitfalls, community servers",
   "tier": "fast",
-  "interval_days": 14,
-  "last_checked": "2026-10-11",
-  "next_due": "2026-10-25",
+  "interval_days": 9.33,
+  "last_checked": "2026-10-30",
+  "next_due": "2026-11-09",
   "verify_at_use": false,
   "volatile_claims": [],
   "contradiction": null,
-  "events": [
-    {
-      "date": "2026-10-17",
-      "note": "recheck Anthropic plugin directory for Roblox Studio plugin"
-    }
-  ],
+  "events": [],
   "streak": {
     "quiet": 0,
     "pinned_min": 0,
@@ -43,12 +38,18 @@
       "m": 0.6,
       "interval_after": 14,
       "note": "execute_luau sandbox rolled back by staff 2026-10-02; contradiction settled"
+    },
+    {
+      "date": "2026-10-30",
+      "m": 0.4,
+      "interval_after": 9.33,
+      "note": "StudioMCP 401 token enforcement bug (DevForum 4960526) added; cost: searches 3 · fetches 1 · tool calls 12"
     }
   ],
   "counts": {
     "learnings": 5,
     "changes": 5,
-    "research": 8,
+    "research": 9,
     "tests": 4
   },
   "consolidate_every": 25,
