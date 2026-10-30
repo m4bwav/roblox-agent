@@ -56,6 +56,14 @@ Best sources (primary first): create.roblox.com docs (`.md` form), DevForum Anno
 
 Newest first. `Track` is subject, tooling, practice, or testing.
 
+### R-20261030-1 · 2026-10-30 · Subject: Studio MCP token enforcement breaks connections (401)
+- track: subject. magnitude: 0.4. applied: C-20261030-1
+- From 2026-10-27, StudioMCP helper v1.0.0 enforces `auth.token` (`FFlagStudioMCPProxyTokenEnforce`) and Studio 0.744/0.745 sends no Authorization header on some Windows installs, so `list_roblox_studios` is empty. Staff (shibaxixi) collecting logs; tracked CREATORBUG-30469; no fix as of 2026-10-28. User workaround (flag off) weakens local auth.
+- sources: https://devforum.roblox.com/t/4960526
+
+### R-20261030-2 · 2026-10-30 · Quiet elsewhere
+- Announcements 10-11..10-29: nothing MCP-specific (Plugin Screenshot Support in Studio 10-27 is a lead for later). No new LoadUnownedAsset sandbox regression. Tooling: Roblox/roblox-studio-agent-plugin one commit (Windows sandbox instructions, 10-15), no release; Chrrxs/robloxstudio-mcp v3.3.0 to v3.4.2 (10-18..10-26), nothing that changes the recommendation. Practice: nothing new. Testing: nothing new.
+
 ### R-20261011-3 · 2026-10-11 · Refresh: the execute_luau sandbox was rolled back by staff (settles the contradiction)
 - summary: Staff wrote "we are rolling this back" on 2026-10-02 (devforum.roblox.com/t/4908470, accepted answer; also /t/4872488). The same restriction appeared 2026-09-14 on 0.738 behind FFlagStudioAssistantPermissionsScriptCapabilities and was fixed 09-18 (/t/4872775). So it is a flag that has come and gone twice, which is why 0.742 tests saw nothing. Also: Roblox's plugin still not in claude-plugins-official; MCP docs unchanged since 10-08 (27 tools); ChatGPT desktop (former Codex desktop) connection reports, staff checking usernames with spaces or non-Latin characters (/t/4914166). Response: adjust (sandbox rule rewritten, eval case added, contradiction cleared). Magnitude 0.6.
 

@@ -42,6 +42,9 @@ Best sources: Roblox Open Cloud docs (`.md` and openapi.json), DevForum Announce
 
 ## Findings log
 
+### R-20261030-1 · 2026-10-30 · Quiet refresh
+- Subject: luau-execution endpoints still STABLE in the docs; no Open Cloud announcement since 10-10; DevForum lead 4965973 (GetFriendsAsync privacy via headless execution, user report, not a skill change). Tooling: jest-roblox-cli v0.4.8..v0.4.10 (patch releases), rbxcloud unchanged since 2025-03. Practice: nothing new. Testing: nothing new. magnitude 0.1.
+
 ### R-20261011-1 · 2026-10-11 · Live run: Luau Execution, Saved upload and Jest Roblox against a real test place
 - Source: live runs with a scoped key on a private test experience (universe and place ids in the private sidecar), rbx_cloud.py from this skill; Wally index for package names.
 - Results: `[42, "text", true, {parts, list, version}]` came back as typed JSON; `print` and `warn` lines both in `logs`; engine 0.742. A script `error()` gave `FAILED`, `{code: SCRIPT_ERROR, message: "TaskScript:2: ..."}` and the stack in the logs. Saved uploads returned versions 4 and 5.
