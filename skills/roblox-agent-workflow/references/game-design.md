@@ -1,6 +1,6 @@
 # Game design before code (Roblox)
 
-Read this when the request is a new experience or a gameplay feature: an obby, a tycoon, a combat round, a new map, enemies, a boss, a checkpoint system. It decides what gets built before any Luau is written, and what a playtest has to look for afterwards. The rules are adapted, in this plugin's words, from Scott Rogers, *Level Up! The Guide to Great Video Game Design* (3rd ed.), with Roblox's own design pages and engine defaults added. Engine values below were read from the API reference on 2026-10-23 (R-20261023-1); look them up again before you rely on them.
+Read this when the request is a new experience or a gameplay feature: an obby, a tycoon, a combat round, a new map, enemies, a boss, a checkpoint system. It decides what gets built before any Luau is written, and what a playtest has to look for afterwards. The rules are adapted, in this plugin's words, from Scott Rogers, *Level Up! The Guide to Great Video Game Design* (3rd ed.), with Roblox's own design pages and engine defaults added; the awareness, NPC update and pathfinding notes in section 4 follow Ian Millington, *AI for Games* (3rd ed.). Engine values below were read from the API reference on 2026-10-23 (R-20261023-1); look them up again before you rely on them.
 
 Roblox's design pages are worth one fetch when the user wants more depth on any of these: `https://create.roblox.com/docs/production/game-design/design-for-roblox.md`, `core-loops.md`, `onboarding.md` and `prototyping.md` in the same folder.
 
@@ -55,7 +55,14 @@ Debug commands (skip stage, invulnerable, grant item, grant currency, teleport t
 
 ## 4. Enemy and encounter card
 
-Fill one card per enemy type before scripting its AI: size, speed, health, attack and its tell, aggression range, and the role it plays. Rules:
+Fill one card per enemy type before scripting its AI: size, speed, health, attack and its tell, aggression range, and the role it plays, plus two rows players notice most:
+
+| Row | What goes there |
+|---|---|
+| Awareness | How it finds the player: detection radius, view cone, line of sight (a raycast, so walls block it), hearing range, reaction delay before it acts, and the cue that shows it noticed (sound, "!" BillboardGui, a turn). A simple radius check is fine when the game does not reward hiding; when sneaking is the game, perception is the gameplay and needs cones and sound. (Millington, AI for Games, ch. 11) |
+| States | At least two, normal and spotted, with a visible and audible switch between them (a bark, a stance, a colour). Players read a change of behaviour more than the behaviour itself, and a missing alarm moment is noticed. (Millington, AI for Games, ch. 2) |
+
+Rules:
 
 - Speed, size and strength trade off. Small means fast and weak, big means slow and strong. Something both fast and strong feels unfair. A chaser should run slightly slower than `WalkSpeed` so retreating works.
 - Every attack has a tell the player can read in time: a wind-up animation, a sound, a glow, a beam. Fast enemies pause between attacks.
@@ -64,6 +71,14 @@ Fill one card per enemy type before scripting its AI: size, speed, health, attac
 - Enemies spawn out of sight or behind a spawner the player can see coming, never inside the player's reach.
 - Health from hits: player health is the number of average hits they should survive times the average enemy damage; enemy health is the number of normal hits it should take.
 - A boss is a readable pattern: an attack to learn, a big attack to survive, a clear vulnerable window, and shorter openings between, escalating over rounds. The arena is designed with the boss. The player lands the final hit, and a respawn should not reset the whole fight.
+
+**Running many NPCs.** Spread the work instead of thinking for every NPC every frame (Millington, AI for Games, ch. 10):
+
+- One server loop on `RunService.Heartbeat` owns the NPCs; each frame it updates only a slice of them (NPC `i` thinks when `frame % N == i % N`), so the cost stays flat as the count grows. Movement can run every frame, sensing every few frames, target choice every second or so; pick intervals that do not divide each other so the heavy updates do not land on the same frame.
+- Do not stand still while a path is computed. `Path:ComputeAsync` yields, so keep the NPC heading at the target and switch to the waypoints when they arrive; recompute when `Path.Blocked` fires or the target has moved far.
+- Give each enemy type its own path agent: `PathfindingService:CreatePath({AgentRadius = ..., AgentHeight = ..., AgentCanJump = ..., AgentCanClimb = ..., WaypointSpacing = ..., Costs = {...}})`. `Costs` maps a material name or a `PathfindingModifier.Label` to a cost multiplier (`math.huge` forbids it). Tag danger or exposure with a `PathfindingModifier` in a region part (for example Label `Exposed`), then let a sneaky type pay `Exposed = 10` while a brute ignores it; `PassThrough = true` on a modifier lets agents path through parts such as doors. Path cost is a design lever: one map, different routes per enemy type (ch. 4).
+- Make the level with the AI: corridors wider than the largest `AgentRadius`, and hand-placed cover or ambush points tagged with CollectionService so the AI reads them instead of working them out at runtime (ch. 4, 6).
+- Seeded randomness: one master seed, and a separate `Random.new(seed + k)` per subsystem (level layout, loot, AI choices). With a single shared stream, a different fight changes what the next level rolls; with a stream per subsystem, the same seed rebuilds the same level (ch. 8). Never `math.random` for anything that should replay.
 
 Introduce elements in order. Movement comes first, then one new mechanic repeated until it is understood, then a second, then both together. After that, a hazard over familiar moves, enemies alone, enemies with hazards, and finally a twist. Two or three new things per stage is plenty.
 
