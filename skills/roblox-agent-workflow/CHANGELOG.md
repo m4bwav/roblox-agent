@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261101-2 · 2026-11-01 · game-design reference: enemy Awareness and States rows, NPC update slicing, path agents
+- because: owner request (book learnings, Millington, AI for Games, 3rd ed., principles 3, 5, 9, 17, 19); R-20261101-2
+- files: references/game-design.md (intro, section 4), RESEARCH.md (R-20261101-2)
+- The enemy card gains Awareness and States rows; a "Running many NPCs" block covers staggered Heartbeat updates, moving while `ComputeAsync` runs, per-type `CreatePath` agent parameters with `Costs` and `PathfindingModifier` labels, level markup with CollectionService, and `Random.new` per subsystem. SKILL.md unchanged, no trigger or decision change, so the evals were not re-run.
+
 ### C-20261101-1 · 2026-11-01 · AGENTS snippet: streamed instances are handles that can go away
 - because: owner request (book learnings, Gregory, Game Engine Architecture 2e (2014), sec. 15.5); R-20261101-1
 - files: references/AGENTS-snippet.md (Roblox rules), RESEARCH.md (R-20261101-1)

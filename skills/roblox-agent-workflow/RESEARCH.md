@@ -50,6 +50,13 @@ Best sources: Roblox docs (`.md`), DevForum Announcements, the three skill sets'
 
 ## Findings log
 
+### R-20261101-2 · 2026-11-01 · Subject: NPC pathfinding agents, modifiers and seeded random
+- summary: `PathfindingService:CreatePath` takes agent parameters `AgentRadius`, `AgentHeight`, `AgentCanJump`, `AgentCanClimb`, `WaypointSpacing` and `Costs`; `Costs` keys are material names or `PathfindingModifier.Label` values, and a modifier's `PassThrough` lets paths cross its part. `Path:ComputeAsync` yields and `Path.Blocked` fires when a computed path is obstructed. `Random.new(seed)` gives an independent stream (`NextInteger`, `NextNumber`, `Clone`). Read on create.roblox.com 2026-11-01. Book reason: Millington, AI for Games, ch. 2, 4, 6, 8, 10, 11 (awareness and state cues, per-unit path cost, time slicing, a random stream per subsystem).
+- track: subject
+- sources: https://create.roblox.com/docs/reference/engine/classes/PathfindingService; https://create.roblox.com/docs/reference/engine/classes/PathfindingModifier; https://create.roblox.com/docs/reference/engine/datatypes/Random; https://create.roblox.com/docs/characters/pathfinding
+- magnitude: 0.1
+- applied: C-20261101-2
+
 ### R-20261101-1 · 2026-11-01 · Subject: references to streamed instances
 - summary: With StreamingEnabled a streamed-out instance is parented to nil (not destroyed); persistent models never stream out and the client waits for `PersistentLoaded`; atomic models are reached with `WaitForChild` on the model. Read on create.roblox.com 2026-11-01. `IsDescendantOf` and the `WaitForChild` timeout argument are standard `Instance` members. Book reason: Gregory, Game Engine Architecture 2e (2014), sec. 15.5 (hold handles to objects that can be unloaded).
 - track: subject
