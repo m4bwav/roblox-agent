@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261101-1 · 2026-11-01 · AGENTS snippet: streamed instances are handles that can go away
+- because: owner request (book learnings, Gregory, Game Engine Architecture 2e (2014), sec. 15.5); R-20261101-1
+- files: references/AGENTS-snippet.md (Roblox rules), RESEARCH.md (R-20261101-1)
+- One rule: check a saved reference still exists, wait with a timeout, or make the model persistent. SKILL.md unchanged, no trigger or decision change, so the evals were not re-run.
+
 ### C-20261025-1 · 2026-10-25 · Step 6: pixel-art images take ResampleMode Pixelated
 - because: R-20261025-1 (book-learnings round 2 track 19)
 - files: SKILL.md (Step 6, one paragraph), RESEARCH.md (R-20261025-1)

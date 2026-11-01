@@ -14,5 +14,6 @@ Copy the section below into the repository's `AGENTS.md` and fill in the angle b
 - Player data: `UpdateAsync` with `pcall` and retries; session locking through <ProfileStore | the project's lock>; save on `PlayerRemoving` and `BindToClose`.
 - Never insert Creator Store models or plugins without checking them for `require(<number>)`, `loadstring`, `getfenv` and HTTP loaders.
 - Architecture lives in <docs/architecture.md>. Do not merge or delete code that looks duplicated without checking who calls it. Features stay in one module or folder.
+- StreamingEnabled: client code treats a part, model or descendant under `Workspace` as a handle that can go away. A streamed-out instance is parented to `nil`, so check `inst:IsDescendantOf(workspace)` before using a saved reference, reach for it with `WaitForChild(name, timeout)` and handle the `nil`, and mark what must stay (`ModelStreamingMode = Persistent`, then wait for `PersistentLoaded`). After Gregory, Game Engine Architecture 2e (2014), sec. 15.5.
 - Never assume: <list the project's traps, for example "StreamingEnabled is on, so parts may not exist on the client">.
 - Publishing a place version that players see (`Published`) needs the maintainer's explicit yes every time.

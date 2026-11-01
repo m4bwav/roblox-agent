@@ -50,6 +50,13 @@ Best sources: Roblox docs (`.md`), DevForum Announcements, the three skill sets'
 
 ## Findings log
 
+### R-20261101-1 · 2026-11-01 · Subject: references to streamed instances
+- summary: With StreamingEnabled a streamed-out instance is parented to nil (not destroyed); persistent models never stream out and the client waits for `PersistentLoaded`; atomic models are reached with `WaitForChild` on the model. Read on create.roblox.com 2026-11-01. `IsDescendantOf` and the `WaitForChild` timeout argument are standard `Instance` members. Book reason: Gregory, Game Engine Architecture 2e (2014), sec. 15.5 (hold handles to objects that can be unloaded).
+- track: subject
+- sources: https://create.roblox.com/docs/workspace/streaming; https://create.roblox.com/docs/reference/engine/classes/Instance
+- magnitude: 0.1
+- applied: C-20261101-1
+
 ### R-20261025-1 · 2026-10-25 · Subject: pixel-art images in Roblox GUIs
 - summary: The pixel-art books read for the book-learnings build (Azzi, *Pixel Logic*, p. 21; Dawe and Humphries, *Make Your Own Pixel Art*, ch. 4) say pixel art scales by whole numbers with nearest-neighbour sampling only. On Roblox that is `ImageLabel.ResampleMode` and `ImageButton.ResampleMode`, type `Enum.ResamplerMode`, items `Default` (0) and `Pixelated` (1), read on create.roblox.com 2026-10-25. The pages give no default or description, so "Default smooths" follows from the name and the books, not from Roblox's text. Not run in Studio.
 - track: subject
