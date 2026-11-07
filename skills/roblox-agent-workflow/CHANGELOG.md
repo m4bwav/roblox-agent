@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261106-1 · 2026-11-06 · Sfxwright, when installed
+- because: user request
+- files: SKILL.md (sfxwright note)
+- Hand sound effects to sfxwright when present and read its sounds.json; this plugin's own steps stay as the fallback.
+
 ### C-20261101-2 · 2026-11-01 · game-design reference: enemy Awareness and States rows, NPC update slicing, path agents
 - because: owner request (book learnings, Millington, AI for Games, 3rd ed., principles 3, 5, 9, 17, 19); R-20261101-2
 - files: references/game-design.md (intro, section 4), RESEARCH.md (R-20261101-2)
