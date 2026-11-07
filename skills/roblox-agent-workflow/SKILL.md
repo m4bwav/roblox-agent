@@ -69,6 +69,8 @@ Before keeping any model, package or plugin from the Creator Store (or one an ag
 
 When a mesh must be made, found, captured or fixed and the polywright plugin is installed, ask polywright through its asset folder ([contract](https://github.com/m4bwav/polywright/blob/main/skills/polywright/references/contract.md)) with the `game-roblox` target, then upload or import the file from `out/` that `manifest.json` names. Limits, styles, scale, collision, performance, avatar items and uploads from the developer's side: [references/3d-models.md](references/3d-models.md).
 
+When a sound effect must be made and the sfxwright plugin is installed, hand it the game events, finish with `--dest roblox`, then read its `sounds.json` for the picked files and licences. Upload stays here. Without it, use a sound you hold the rights to; these steps work alone.
+
 Pixel-art images in a GUI (`ImageLabel`, `ImageButton`): set `ResampleMode` to `Enum.ResamplerMode.Pixelated`, or Roblox smooths the scaled pixels into blur, and size the element at a whole-number multiple of the image's pixels (R-20261025-1).
 
 ## Step 7: AI that players meet
