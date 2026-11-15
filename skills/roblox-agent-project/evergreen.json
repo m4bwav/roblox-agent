@@ -13,9 +13,9 @@
   "source": null,
   "topic": "Roblox code on disk for agents: Studio Script Sync versus Rojo, Rokit toolchain, project layout, packages, one writer per script, luau-lsp editor types",
   "tier": "moderate",
-  "interval_days": 30,
-  "last_checked": "2026-10-10",
-  "next_due": "2026-11-09",
+  "interval_days": 30.0,
+  "last_checked": "2026-11-15",
+  "next_due": "2026-12-16",
   "verify_at_use": false,
   "volatile_claims": [],
   "contradiction": null,
@@ -32,12 +32,18 @@
       "m": null,
       "interval_after": 30,
       "note": "created"
+    },
+    {
+      "date": "2026-11-15",
+      "m": 0.1,
+      "interval_after": 30.0,
+      "note": "quiet; StyLua 2.5.0 noted only; cost: searches ~3 · fetches ~1 · tool calls ~6"
     }
   ],
   "counts": {
     "learnings": 0,
     "changes": 0,
-    "research": 3,
+    "research": 4,
     "tests": 3
   },
   "consolidate_every": 25,

@@ -13,6 +13,8 @@ Read `evergreen.json` next to this file. If `contradiction` is set or today is o
 
 ## Step 1: the key (the user's job)
 
+Studio open and the game published? Since 2026-11 Studio's built-in MCP server has `open_cloud_invoke`, which calls Open Cloud with Studio's own auth, so no API key is needed (asset upload, developer products, game passes, place settings, publishing, bans; data and memory stores go through `execute_luau`). The user sets the MCP permission level (Safe, Balanced default, Full, Custom) and approves upload folders; uploads are permanent. Some scopes (badges, some data store controls, legacy) cannot be granted and some endpoints reject the MCP token, so fall back to a key. Roblox's skills rbx-open-cloud-usage, rbx-permissions and rbx-import-asset cover this route (roblox-agent-studio). Use the key below for CI, headless runs, Luau Execution and place-version uploads from a built file.
+
 The user creates an API key at the Creator Dashboard (Open Cloud, API Keys), limited to the one experience and to these permissions:
 
 - Luau Execution: `universe.place.luau-execution-session` write and read.

@@ -13,9 +13,9 @@
   "source": null,
   "topic": "Connecting AI agents to Roblox Studio through its built-in MCP server: Roblox official agent plugin, manual stdio entries, tool list, playtest loop, sandbox and connection pitfalls, community servers",
   "tier": "fast",
-  "interval_days": 9.33,
-  "last_checked": "2026-10-30",
-  "next_due": "2026-11-09",
+  "interval_days": 6.22,
+  "last_checked": "2026-11-15",
+  "next_due": "2026-11-21",
   "verify_at_use": false,
   "volatile_claims": [],
   "contradiction": null,
@@ -44,12 +44,18 @@
       "m": 0.4,
       "interval_after": 9.33,
       "note": "StudioMCP 401 token enforcement bug (DevForum 4960526) added; cost: searches 3 · fetches 1 · tool calls 12"
+    },
+    {
+      "date": "2026-11-15",
+      "m": 0.4,
+      "interval_after": 6.22,
+      "note": "open_cloud_invoke + permission levels + 3 Roblox skills (R-20261115-1); cost: searches ~3 · fetches ~1 · tool calls ~6"
     }
   ],
   "counts": {
     "learnings": 5,
     "changes": 5,
-    "research": 9,
+    "research": 10,
     "tests": 4
   },
   "consolidate_every": 25,

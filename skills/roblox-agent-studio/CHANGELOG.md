@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261115-1 · 2026-11-15 · Studio MCP route to Open Cloud without a key
+- because: R-20261115-1
+- files: SKILL.md (Step 3)
+- Points to `open_cloud_invoke`, its permission levels and Roblox's three new skills.
+
 ### C-20261030-1 · 2026-10-30 · Known bug: StudioMCP 401 token enforcement
 - because: R-20261030-1
 - files: SKILL.md (known bugs list)

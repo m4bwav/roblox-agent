@@ -13,9 +13,9 @@
   "source": null,
   "topic": "Roblox Open Cloud for agents: Luau Execution tasks, Jest Roblox engine tests in CI, place version upload, API keys, scopes and rate limits",
   "tier": "fast",
-  "interval_days": 14.0,
-  "last_checked": "2026-10-30",
-  "next_due": "2026-11-13",
+  "interval_days": 7.0,
+  "last_checked": "2026-11-15",
+  "next_due": "2026-11-21",
   "verify_at_use": false,
   "volatile_claims": [],
   "contradiction": null,
@@ -44,12 +44,18 @@
       "m": 0.1,
       "interval_after": 14.0,
       "note": "quiet: luau-execution STABLE, jest-roblox-cli patches; cost: searches 3 · fetches 1 · tool calls 12"
+    },
+    {
+      "date": "2026-11-15",
+      "m": 0.6,
+      "interval_after": 7.0,
+      "note": "Studio MCP open_cloud_invoke route added (R-20261115-1); cost: searches ~3 · fetches ~1 · tool calls ~6"
     }
   ],
   "counts": {
     "learnings": 3,
     "changes": 1,
-    "research": 6,
+    "research": 7,
     "tests": 4
   },
   "consolidate_every": 25,
