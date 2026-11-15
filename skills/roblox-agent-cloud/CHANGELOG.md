@@ -4,6 +4,11 @@ Every change to [SKILL.md](SKILL.md) and its companions, newest first, each with
 
 Entry shape: `### C-YYYYMMDD-n · date · one-line summary`, then `because:` (IDs or "user request"), `files:` (file and section), and a sentence on what changed. Cite section headings, not line numbers.
 
+### C-20261115-1 · 2026-11-15 · Studio MCP route to Open Cloud without a key
+- because: R-20261115-1
+- files: SKILL.md (Step 1)
+- Points to `open_cloud_invoke`, its permission levels and Roblox's three new skills.
+
 ### C-20261011-1 · 2026-10-11 · Live run findings: Jest setup, 409 on upload, rate lead
 - because: R-20261011-1, L-001, L-002, L-003, T-20261011-1
 - files: SKILL.md (Step 2 limits, Step 3, Step 4), references/run-jest.luau, RESEARCH.md

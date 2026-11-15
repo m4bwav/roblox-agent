@@ -54,6 +54,11 @@ Best sources (primary first): create.roblox.com docs (`.md` form), DevForum Anno
 
 ## Findings log
 
+### R-20261115-1 · 2026-11-15 · Studio MCP `open_cloud_invoke`: Open Cloud without an API key
+- track: subject, tooling · magnitude: 0.4 · applied: C-20261115-1
+- Studio's built-in MCP server calls Open Cloud with Studio's auth (published game, manage rights, per-user per-game permission levels, approved upload folders, permanent uploads); three Roblox skills ship with it. Also leads, unconfirmed: Analytics Query API beta and Ads Manager API test on Open Cloud (DevForum). Testing: nothing new.
+- Sources: https://create.roblox.com/docs/studio/mcp-open-cloud (docs, updated 2026-11-14); announced about 2026-11-04 (secondary: gamineai.com).
+
 Newest first. `Track` is subject, tooling, practice, or testing.
 
 ### R-20261030-1 · 2026-10-30 · Subject: Studio MCP token enforcement breaks connections (401)

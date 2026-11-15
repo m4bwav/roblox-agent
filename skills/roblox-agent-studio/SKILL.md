@@ -43,7 +43,7 @@ Studio must be open on Windows or macOS with a place loaded. There is no Linux S
 - There is no batch undo for agent edits. Before a multi-script change, have the user commit or save a copy of the place, or keep the change in synced files where Git can undo it.
 - Search tools cap their results (`script_search` top 10, `script_grep` top 50). For a project-wide refactor, work on synced files with ripgrep instead.
 - Inserting from the Creator Store (`search_asset`, `insert_asset`) can bring in backdoors. Inspect inserted scripts for `require(<number>)`, `loadstring`, `getfenv` and HTTP loaders before keeping them.
-- `http_get` reaches Roblox docs domains only. Roblox's own skills come through the `skill` tool: rbx-debug, rbx-perf-profiling, rbx-scene-analysis, rbx-unit-test, rbx-docs-search, rbx-device-simulator-lua and rbx-create-skill. Use them for those jobs rather than improvising.
+- `http_get` reaches Roblox docs domains only. Roblox's own skills come through the `skill` tool: rbx-debug, rbx-perf-profiling, rbx-scene-analysis, rbx-unit-test, rbx-docs-search, rbx-device-simulator-lua and rbx-create-skill, plus rbx-open-cloud-usage, rbx-permissions and rbx-import-asset (2026-11). `open_cloud_invoke` calls Open Cloud through Studio's auth with no API key, within the permission level the user set (Safe, Balanced, Full, Custom); the client cannot raise it, upload folders need the user's approval, the game must be published, and uploads are permanent. Confirm all of that before any upload. Use them for those jobs rather than improvising.
 
 ## Step 4: the playtest-and-verify loop
 
