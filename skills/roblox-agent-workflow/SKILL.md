@@ -93,6 +93,10 @@ The plan written (Step 1, when it applied), the code or review, the doc pages ci
 
 If the user corrects you, the same error happens twice, a workaround is found, or an environment fact is discovered, write it to `LEARNINGS.md` now (format in MAINTENANCE.md; check existing entries first). If a learning proves a claim above wrong, fix it here, log it in `CHANGELOG.md`, and set `contradiction` in `evergreen.json`.
 
+## YouTube videos
+
+Roblox tutorials give steps and gotchas, but the API drifts fast: docs first, video second. Use fetchwright's `yt.py read URL` (captions, chapters, `&t=` links; opt-in route) and `yt.py clip URL A-B "question"` (Gemini reads the screen for spans of 2 minutes or less). Cite the `&t=` link and check numbers against a written source: auto-captions drop decimals.
+
 ## Maintenance
 
 This skill is evergreen (tier `moderate`; the schedule is in `evergreen.json`). Files: `evergreen.json` (state), [RESEARCH.md](RESEARCH.md) (findings and search plan), [CHANGELOG.md](CHANGELOG.md) (every change, with reasons), [LEARNINGS.md](LEARNINGS.md) (lessons), [TESTS.md](TESTS.md) and `evals/evals.json` (the cases that prove it and the runs). Protocol: MAINTENANCE.md (pointer to the installed evergreen plugin). Refresh with `evergreen-refresh`; test with `evergreen-test`; fix a failure with `evergreen-tune`. Sibling skills in this suite: roblox-agent-checks, roblox-agent-cloud, roblox-agent-project, roblox-agent-studio, roblox-agent-workflow.
