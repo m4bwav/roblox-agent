@@ -60,7 +60,7 @@ the condensed rules for that case.
 The skills install nothing on their own. Roblox Studio, Roblox's agent plugin, Rokit and its tools, any MCP
 registration and an Open Cloud API key are all left to you to approve.
 
-As a Claude Code plugin:
+In Claude Code:
 
     /plugin marketplace add m4bwav/roblox-agent
     /plugin install roblox-agent@roblox-agent
